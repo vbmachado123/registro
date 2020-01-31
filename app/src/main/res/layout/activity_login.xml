@@ -8,7 +8,7 @@
     tools:context="victor.machado.com.br.registro.LoginActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/botaoLogarId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="198dp"
@@ -16,15 +16,15 @@
         android:text="Login"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/editText2"
-        app:layout_constraintRight_toRightOf="@+id/editText2"
+        app:layout_constraintLeft_toLeftOf="@+id/senhaLoginId"
+        app:layout_constraintRight_toRightOf="@+id/senhaLoginId"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/emailLoginId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="14dp"
@@ -37,7 +37,7 @@
         android:inputType="textPersonName"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/senhaLoginId"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/senhaLoginId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="22dp"
@@ -59,7 +59,7 @@
         android:inputType="textPassword"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/botaoLogarId"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
@@ -68,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/registraId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -76,7 +76,7 @@
         android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/botaoLogarId"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
@@ -88,6 +88,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:srcCompat="@drawable/logo"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/editText" />
+        app:layout_constraintBottom_toTopOf="@+id/emailLoginId" />
 
 </android.support.constraint.ConstraintLayout>
