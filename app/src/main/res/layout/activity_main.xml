@@ -7,6 +7,10 @@
     android:background="@drawable/fundo"
     tools:context="victor.machado.com.br.registro.MainActivity">
 
+<include android:id="@+id/toolbar"
+    layout="@layout/toolbar"/>
+
+
 
     <EditText
         android:id="@+id/endClienteId"
@@ -79,12 +83,12 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/celularClienteId"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_marginTop="21dp"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/proprietarioId"
@@ -114,15 +118,14 @@
 
     <Button
         android:id="@+id/gerarDocId"
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:background="@color/colorPrimaryDark"
         android:text="Enviar Cadastro"
         android:textColor="@android:color/white"
+        android:layout_marginTop="26dp"
         android:layout_below="@+id/radioGroup"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
