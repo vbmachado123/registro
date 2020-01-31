@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fundo"
     tools:context="victor.machado.com.br.registro.MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/endClienteId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:ems="10"
+        android:hint="Endereço"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/nomeClienteId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/endClienteId"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/rgClienteId"
+        android:layout_width="@dimen/largura_Campo"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nomeClienteId"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Rg"
+        android:inputType="number"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/cpfClienteId"
+        android:layout_width="@dimen/largura_Campo"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rgClienteId"
+        android:layout_alignBottom="@+id/rgClienteId"
+        android:layout_toEndOf="@+id/rgClienteId"
+        android:layout_toRightOf="@+id/rgClienteId"
+        android:ems="10"
+        android:hint="Cpf"
+        android:inputType="number"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/celularClienteId"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rgClienteId"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Celular"
+        android:inputType="number"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorPrimary" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/celularClienteId"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <RadioButton
+            android:id="@+id/proprietarioId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText5"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_toLeftOf="@+id/cpfClienteId"
+            android:layout_toStartOf="@+id/cpfClienteId"
+            android:text="Proprietário"
+            android:textColor="@color/colorPrimary" />
+
+        <RadioButton
+            android:id="@+id/moradorResponsavelId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText5"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/radioGroup"
+            android:layout_toRightOf="@+id/radioGroup"
+            android:text="Morador Responsável"
+            android:textColor="@color/colorPrimary" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/gerarDocId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Enviar Cadastro"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

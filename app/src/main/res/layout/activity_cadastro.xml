@@ -7,7 +7,6 @@
     android:background="@drawable/fundo"
     tools:context="victor.machado.com.br.registro.CadastroActivity">
 
-    <!--app:layout_constraintBottom_toTopOf="@id/cadastroNomeId"-->
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="385dp"
@@ -68,5 +67,14 @@
         android:text="Cadastrar"
         android:textColor="@android:color/white" />
 
+    <TextView
+        android:id="@+id/loginId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cadastrarBotaoId"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Já sou registrado" />
 
 </RelativeLayout>
