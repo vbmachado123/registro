@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">registro</string>
+    <string name="login_email">Digite seu e-mail</string>
+    <string name="login_senha">Digite sua senha</string>
 </resources>
