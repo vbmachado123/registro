@@ -27,10 +27,6 @@ public class ConfirmaActivity extends AppCompatActivity {
     private Button naoBotao;
     private Button simBotao;
 
-    //Recuperando as informações do cliente
-    Intent intent = getIntent();
-    Bundle extras = intent.getExtras();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +38,10 @@ public class ConfirmaActivity extends AppCompatActivity {
         recuperaCpf = (TextView) findViewById(R.id.confirmaCpf);
         recuperaCelular = (TextView) findViewById(R.id.confirmaCelular);
         recuperaResponsabilidade = (TextView) findViewById(R.id.confirmaResponsabilidade);
+
+        //Recuperando as informações do cliente
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
 
         //Concatenando informações para confirmação
         String exibeEndereco = "Endereço: " + extras.getString("endereco");
@@ -88,17 +88,12 @@ public class ConfirmaActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Salvando no banco...!", Toast.LENGTH_SHORT).show();
 
- /*       Cliente c = new Cliente();
-        c.setEndereco(extras.getString("endereco"));
-        c.setNome(extras.getString("nome"));
-        c.setRg(extras.getString("rg"));
-        c.setCpf(extras.getString("cpf"));
-        c.setCelular(extras.getString("celular"));
-        c.setOpcaoEscolhida(extras.getString("responsabilidade"));*/
-
-        Intent intent = new Intent(ConfirmaActivity.this, ImagemActivity.class);
-        intent.putExtras(extras);
-        startActivity(intent);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String endereco = extras.getString("endereco");
+        Intent i = new Intent(ConfirmaActivity.this, ImagemActivity.class);
+        i.putExtras(extras);
+        startActivity(i);
 
     }
 
