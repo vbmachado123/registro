@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    public static final int CONSTANTE_CADASTRO = 1;
+
     Cliente cliente = new Cliente();
 
     @Override
@@ -77,14 +79,6 @@ public class MainActivity extends AppCompatActivity {
         MaskTextWatcher mtwCell = new MaskTextWatcher(celular, smfCell);
         celular.addTextChangedListener(mtwCell);
 
-        //Setando valores para o CLIENTE
-        cliente.setNome(nome.getText().toString());
-        cliente.setEndereco(endereco.getText().toString());
-        cliente.setRg(rg.getText().toString());
-        cliente.setCpf(cpf.getText().toString());
-        cliente.setCelular(celular.getText().toString());
-        cliente.setOpcaoEscolhida(opcaoEscolhida);
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -106,19 +100,17 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, ConfirmaActivity.class);
 
-
-
                 Bundle bundle = new Bundle();
-                bundle.putString("endereco", cliente.getEndereco());
-                bundle.putString("nome", cliente.getNome());
-                bundle.putString("rg", cliente.getRg());
-                bundle.putString("cpf", cliente.getCpf());
-                bundle.putString("celular", cliente.getCelular());
-                bundle.putString("responsabilidade", cliente.getOpcaoEscolhida());
+                bundle.putString("endereco", endereco.getText().toString());
+                bundle.putString("nome", nome.getText().toString());
+                bundle.putString("rg", rg.getText().toString());
+                bundle.putString("cpf", cpf.getText().toString());
+                bundle.putString("celular", celular.getText().toString());
+                bundle.putString("responsabilidade", opcaoEscolhida.toString());
 
                 intent.putExtras(bundle);
 
-                startActivity(intent);
+                startActivityForResult(intent, CONSTANTE_CADASTRO);
 
             }
         });
@@ -153,3 +145,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+/*
+//Setando valores para o CLIENTE - NÃO FUNCIONANDO
+                cliente.setNome(nome.getText().toString());
+                cliente.setEndereco(endereco.getText().toString());
+                cliente.setRg(rg.getText().toString());
+                cliente.setCpf(cpf.getText().toString());
+                cliente.setCelular(celular.getText().toString());
+                cliente.setOpcaoEscolhida(opcaoEscolhida);
+                */

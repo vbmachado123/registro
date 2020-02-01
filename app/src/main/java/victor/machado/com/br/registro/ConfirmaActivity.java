@@ -1,7 +1,17 @@
 package victor.machado.com.br.registro;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +26,15 @@ public class ConfirmaActivity extends AppCompatActivity {
     private TextView recuperaCelular;
     private TextView recuperaResponsabilidade;
 
-    Cliente cliente = new Cliente();
+    private Button naoBotao;
+    private Button simBotao;
+
+   //Cliente cliente = new Cliente();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_confirma);
         recuperaEnd = (TextView) findViewById(R.id.confirmaEnd);
         recuperaNome = (TextView) findViewById(R.id.confirmaNome);
@@ -30,15 +44,15 @@ public class ConfirmaActivity extends AppCompatActivity {
         recuperaResponsabilidade = (TextView) findViewById(R.id.confirmaResponsabilidade);
 
         //Recuperando as informações do cliente
-        Bundle extras = getIntent().getExtras();
-        Toast.makeText(this, extras.toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
 
-        String exibeEndereco = "Endereço: " + cliente.getEndereco();
-        String exibeNome = "Nome: " + cliente.getNome();
-        String exibeRg = "Rg: " + cliente.getRg();
-        String exibeCpf = "Cpf: " + cliente.getCpf();
-        String exibeCelular = "Celular: " + cliente.getCelular();
-        String exibeResponsabilidade = "O morador é: " + cliente.getOpcaoEscolhida();
+        String exibeEndereco = "Endereço: " + extras.getString("endereco");
+        String exibeNome = "Nome: " + extras.getString("nome");
+        String exibeRg = "Rg: " + extras.getString("rg");
+        String exibeCpf = "Cpf: " + extras.getString("cpf");
+        String exibeCelular = "Celular: " + extras.getString("celular");
+        String exibeResponsabilidade = "O morador é: " + extras.getString("responsabilidade");
 
         recuperaEnd.setText(exibeEndereco);
         recuperaNome.setText(exibeNome);
@@ -46,9 +60,40 @@ public class ConfirmaActivity extends AppCompatActivity {
         recuperaCpf.setText(exibeCpf);
         recuperaCelular.setText(exibeCelular);
         recuperaResponsabilidade.setText(exibeResponsabilidade);
+
+        naoBotao = (Button) findViewById(R.id.botaoNao);
+        simBotao = (Button) findViewById(R.id.botaoSim);
+
+        naoBotao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ConfirmaActivity.this, MainActivity.class);
+                startActivity(intent1);
+            }
+        });
+
+        simBotao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ActivityCompat.checkSelfPermission(ConfirmaActivity.this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(ConfirmaActivity.this,
+                        new String[] {Manifest.permission.CAMERA}, 0);
+                }
+                salvaNoBanco();
+            }
+        });
+
     }
 
     public void salvaNoBanco(){
 
+        Toast.makeText(this, "Salvando no banco...!", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(ConfirmaActivity.this, ImagemActivity.class);
+        startActivity(intent);
+
     }
+
+
 }

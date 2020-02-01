@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="victor.machado.com.br.registro">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +21,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ConfirmaActivity"></activity>
+        <activity android:name=".ConfirmaActivity" />
+        <activity android:name=".ImagemActivity"></activity>
     </application>
 
 </manifest>
