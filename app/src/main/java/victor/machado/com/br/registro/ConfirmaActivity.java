@@ -22,7 +22,6 @@ public class ConfirmaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirma);
-
         recuperaEnd = (TextView) findViewById(R.id.confirmaEnd);
         recuperaNome = (TextView) findViewById(R.id.confirmaNome);
         recuperaRg = (TextView) findViewById(R.id.confirmaRg);

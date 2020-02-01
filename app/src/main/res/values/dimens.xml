@@ -3,4 +3,6 @@
     <dimen name="largura_logo">385dp</dimen>
     <dimen name="altura_logo">214dp</dimen>
     <dimen name="largura_Campo">190dp</dimen>
+    <dimen name="largura_Botao">100dp</dimen>
+    <dimen name="altura_Botao">70dp</dimen>
 </resources>

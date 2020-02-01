@@ -8,24 +8,80 @@
     tools:context="victor.machado.com.br.registro.ConfirmaActivity">
 
 
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/botaoSim"
+        android:layout_width="@dimen/largura_Botao"
+        android:layout_height="@dimen/altura_Botao"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Sim"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="49dp"
+        android:layout_marginEnd="49dp"
+        android:id="@+id/relativeLayout">
+
+
+
+        <Button
+            android:id="@+id/botaoNao"
+            android:layout_width="@dimen/largura_Botao"
+            android:layout_height="@dimen/altura_Botao"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:background="@color/colorPrimaryDark"
+            android:paddingHorizontal="20dp"
+            android:text="Não"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="29dp" />
+
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:text="@string/textoConfirma"
+        android:layout_below="@+id/toolbar"
+        android:textSize="18dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="34dp"
-        android:text="@string/textoConfirma"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp" />
+        />
 
     <TextView
         android:id="@+id/confirmaEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="29dp"
         android:textColor="@color/colorAccent"
+        android:textSize="16dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -34,8 +90,9 @@
         android:id="@+id/confirmaNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="31dp"
         android:textColor="@color/colorAccent"
+        android:textSize="16dp"
         android:layout_below="@+id/confirmaEnd"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -44,28 +101,31 @@
         android:id="@+id/confirmaRg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/confirmaNome"
-        android:layout_alignRight="@+id/confirmaNome"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
         android:layout_below="@+id/confirmaNome"
-        android:layout_marginTop="38dp"
-        android:textColor="@color/colorAccent"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/confirmaCpf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
         android:textColor="@color/colorAccent"
+        android:layout_marginTop="36dp"
         android:layout_below="@+id/confirmaRg"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/confirmaCelular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:textSize="16dp"
         android:textColor="@color/colorAccent"
+        android:layout_marginTop="39dp"
         android:layout_below="@+id/confirmaCpf"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -74,11 +134,12 @@
         android:id="@+id/confirmaResponsabilidade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:textColor="@color/colorAccent"
-        android:layout_below="@+id/confirmaCelular"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/confirmaCelular"
+        android:layout_marginTop="41dp"
+        android:textSize="16dp"
+        android:textColor="@color/colorAccent"
+        />
 
 </RelativeLayout>
