@@ -20,6 +20,7 @@ public class ImagemActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 1);
+
     }
 
     @Override

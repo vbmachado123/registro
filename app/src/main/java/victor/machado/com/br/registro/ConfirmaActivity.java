@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import model.Cliente;
-
 public class ConfirmaActivity extends AppCompatActivity {
 
     private TextView recuperaEnd;
@@ -29,7 +27,9 @@ public class ConfirmaActivity extends AppCompatActivity {
     private Button naoBotao;
     private Button simBotao;
 
-   //Cliente cliente = new Cliente();
+    //Recuperando as informações do cliente
+    Intent intent = getIntent();
+    Bundle extras = intent.getExtras();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,7 @@ public class ConfirmaActivity extends AppCompatActivity {
         recuperaCelular = (TextView) findViewById(R.id.confirmaCelular);
         recuperaResponsabilidade = (TextView) findViewById(R.id.confirmaResponsabilidade);
 
-        //Recuperando as informações do cliente
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
+        //Concatenando informações para confirmação
         String exibeEndereco = "Endereço: " + extras.getString("endereco");
         String exibeNome = "Nome: " + extras.getString("nome");
         String exibeRg = "Rg: " + extras.getString("rg");
@@ -54,6 +51,7 @@ public class ConfirmaActivity extends AppCompatActivity {
         String exibeCelular = "Celular: " + extras.getString("celular");
         String exibeResponsabilidade = "O morador é: " + extras.getString("responsabilidade");
 
+        //Exibindo informações para confirmação
         recuperaEnd.setText(exibeEndereco);
         recuperaNome.setText(exibeNome);
         recuperaRg.setText(exibeRg);
@@ -88,9 +86,18 @@ public class ConfirmaActivity extends AppCompatActivity {
 
     public void salvaNoBanco(){
 
-        Toast.makeText(this, "Salvando no banco...!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Salvando no banco...!", Toast.LENGTH_SHORT).show();
+
+ /*       Cliente c = new Cliente();
+        c.setEndereco(extras.getString("endereco"));
+        c.setNome(extras.getString("nome"));
+        c.setRg(extras.getString("rg"));
+        c.setCpf(extras.getString("cpf"));
+        c.setCelular(extras.getString("celular"));
+        c.setOpcaoEscolhida(extras.getString("responsabilidade"));*/
 
         Intent intent = new Intent(ConfirmaActivity.this, ImagemActivity.class);
+        intent.putExtras(extras);
         startActivity(intent);
 
     }

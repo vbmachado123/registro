@@ -22,7 +22,6 @@ import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import model.Cliente;
 
-
 public class MainActivity extends AppCompatActivity {
 
     //Informações gerais
@@ -93,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Setando valores para o CLIENTE - NÃO FUNCIONANDO
+                cliente.setNome(nome.getText().toString());
+                cliente.setEndereco(endereco.getText().toString());
+                cliente.setRg(rg.getText().toString());
+                cliente.setCpf(cpf.getText().toString());
+                cliente.setCelular(celular.getText().toString());
+                cliente.setOpcaoEscolhida(opcaoEscolhida);
 
         botaoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,13 +151,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-/*
-//Setando valores para o CLIENTE - NÃO FUNCIONANDO
-                cliente.setNome(nome.getText().toString());
-                cliente.setEndereco(endereco.getText().toString());
-                cliente.setRg(rg.getText().toString());
-                cliente.setCpf(cpf.getText().toString());
-                cliente.setCelular(celular.getText().toString());
-                cliente.setOpcaoEscolhida(opcaoEscolhida);
-                */

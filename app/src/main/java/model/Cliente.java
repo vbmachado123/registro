@@ -6,6 +6,7 @@ package model;
 
 public class Cliente {
 
+    private Long id;
     private String endereco="";
     private String nome="";
     private String rg="";
@@ -59,5 +60,11 @@ public class Cliente {
 
     public void setOpcaoEscolhida(String opcaoEscolhida) {
         this.opcaoEscolhida = opcaoEscolhida;
+    }
+
+    public Long getId() {return id;}
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
