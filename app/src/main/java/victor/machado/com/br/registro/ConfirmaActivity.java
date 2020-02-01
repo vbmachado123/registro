@@ -1,22 +1,22 @@
 package victor.machado.com.br.registro;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ConfirmaActivity extends Activity {
+import model.Formulario;
+import model.FormularioDAO;
+
+public class ConfirmaActivity extends AppCompatActivity {
 
     private TextView exibeEndereco;
     private TextView exibeNome;
@@ -29,12 +29,17 @@ public class ConfirmaActivity extends Activity {
     private Button simBotao;
 
     private Bundle bundle = new Bundle();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_confirma);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Registro");
+        setSupportActionBar(toolbar);
+
         exibeEndereco = (TextView) findViewById(R.id.confirmaEnd);
         exibeNome = (TextView) findViewById(R.id.confirmaNome);
         exibeRg = (TextView) findViewById(R.id.confirmaRg);
@@ -42,9 +47,8 @@ public class ConfirmaActivity extends Activity {
         exibeCelular = (TextView) findViewById(R.id.confirmaCelular);
         exibeResponsabilidade = (TextView) findViewById(R.id.confirmaResponsabilidade);
 
-
         //Recuperando as informações do cliente
-          final Intent intent = getIntent();
+         Intent intent = getIntent();
          Bundle extras = intent.getExtras();
 
         //Recuperando informações
@@ -64,47 +68,46 @@ public class ConfirmaActivity extends Activity {
         exibeRg.setText("Rg: " + recuperaRg);
         exibeCpf.setText("Cpf: " + recuperaCpf);
         exibeCelular.setText("Celular: " + recuperaCelular);
-        exibeResponsabilidade.setText("O morador é: " + recuperaResponsabilidade);
+        exibeResponsabilidade.setText("O cliente é: " + recuperaResponsabilidade);
 
-        naoBotao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(ConfirmaActivity.this, MainActivity.class);
-                startActivity(intent1);
-            }
-        });
-
-        simBotao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ActivityCompat.checkSelfPermission(ConfirmaActivity.this, Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(ConfirmaActivity.this,
-                        new String[] {Manifest.permission.CAMERA}, 0);
+            naoBotao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(ConfirmaActivity.this, MainActivity.class);
+                    startActivity(intent1);
                 }
+            });
 
-                bundle.putString("endereco", recuperaEnd.toString());
-                bundle.putString("nome", recuperaNome.toString());
-                bundle.putString("rg", recuperaRg.toString());
-                bundle.putString("cpf", recuperaCpf.toString());
-                bundle.putString("celular", recuperaCelular.toString());
-                bundle.putString("responsabilidade", recuperaResponsabilidade.toString());
+            simBotao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Intent i = new Intent(ConfirmaActivity.this, ImagemActivity.class);
-                i.putExtras(bundle);
-                startActivity(i);
+                  FormularioDAO  dao = new FormularioDAO(ConfirmaActivity.this);
 
-                salvaNoBanco();
-            }
-        });
+                    Formulario f = new Formulario();
+                    f.setEndereco(recuperaEnd.toString());
+                    f.setNome(recuperaNome.toString());
+                    f.setRg(recuperaRg.toString());
+                    f.setCpf(recuperaCpf.toString());
+                    f.setCelular(recuperaCelular.toString());
+                    f.setResponsabilidade(recuperaResponsabilidade.toString());
+                    long id = dao.inserir(f);
+
+                    Intent i = new Intent(ConfirmaActivity.this, ExibePDFActivity.class);
+                   // startActivity(i);
+
+                }
+            });
 
     }
 
-    public void salvaNoBanco(){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-        Toast.makeText(this, "Salvando no banco...!", Toast.LENGTH_SHORT).show();
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_confirma, menu);
+
+        return true;
 
     }
-
-
 }

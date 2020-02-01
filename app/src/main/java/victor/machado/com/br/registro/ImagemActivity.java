@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ public class ImagemActivity extends AppCompatActivity {
     private Uri uriImagem = null;
     private String caminhoDaImagem;
     private static final int CAMERA = 1;
+    private Button assinarDoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,19 @@ public class ImagemActivity extends AppCompatActivity {
         File imagem = new File(diretorio.getPath() + "/" + System.currentTimeMillis() + ".jpg");
         uriImagem  = Uri.fromFile(imagem);
 
-
         imagemDocumento = (ImageView) findViewById(R.id.imgDocumento);
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
+
+        assinarDoc = (Button) findViewById(R.id.botaoAssinar);
+        assinarDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ImagemActivity.this, AssinaturaActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -59,14 +70,15 @@ public class ImagemActivity extends AppCompatActivity {
             String Celular = extra.getString("celular");
             String Responsabilidade = extra.getString("responsabilidade");
 
-          //  Toast.makeText(this, endereco, Toast.LENGTH_SHORT).show();
-
             imagemDocumento.setImageBitmap(imagem);
 
                 Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uriImagem);
                 sendBroadcast(novaIntent);
 
-                Toast.makeText(this, caminhoDaImagem, Toast.LENGTH_LONG).show();
+            //Setando as informações para a última ACTIVITY
+
+
+               //Toast.makeText(this, caminhoDaImagem, Toast.LENGTH_LONG).show();
 
         } else{
 

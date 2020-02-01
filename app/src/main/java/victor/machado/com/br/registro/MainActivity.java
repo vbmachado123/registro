@@ -9,18 +9,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.github.rtoshiro.util.format.MaskFormatter;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
-
-import model.Cliente;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     public static final int CONSTANTE_CADASTRO = 1;
-
-    Cliente cliente = new Cliente();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Setando valores para o CLIENTE - NÃO FUNCIONANDO
-                cliente.setNome(nome.getText().toString());
-                cliente.setEndereco(endereco.getText().toString());
-                cliente.setRg(rg.getText().toString());
-                cliente.setCpf(cpf.getText().toString());
-                cliente.setCelular(celular.getText().toString());
-                cliente.setOpcaoEscolhida(opcaoEscolhida);
-
         botaoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,11 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtras(bundle);
 
-                startActivityForResult(intent, CONSTANTE_CADASTRO);
-
+                startActivity(intent);
             }
         });
-
     }
 
     @Override

@@ -1,18 +1,28 @@
 package model;
 
+import java.io.Serializable;
+
 /**
- * Created by victor on 31/01/20.
+ * Created by victor on 01/02/20.
  */
 
-public class Cliente {
+public class Formulario implements Serializable {
 
-    private Long id;
-    private String endereco="";
-    private String nome="";
-    private String rg="";
-    private String cpf="";
-    private String celular="";
-    private String opcaoEscolhida;
+    private Integer id;
+    private String endereco;
+    private String nome;
+    private String rg;
+    private String cpf;
+    private String celular;
+    private String responsabilidade;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getEndereco() {
         return endereco;
@@ -54,17 +64,17 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public String getOpcaoEscolhida() {
-        return opcaoEscolhida;
+    public String getResponsabilidade() {
+        return responsabilidade;
     }
 
-    public void setOpcaoEscolhida(String opcaoEscolhida) {
-        this.opcaoEscolhida = opcaoEscolhida;
+    public void setResponsabilidade(String responsabilidade) {
+        this.responsabilidade = responsabilidade;
     }
 
-    public Long getId() {return id;}
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String toString(){
+            return nome;
     }
 }
+
