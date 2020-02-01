@@ -16,12 +16,12 @@
         android:text="Login"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/senhaLoginId"
         app:layout_constraintRight_toRightOf="@+id/senhaLoginId"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_constraintRight_creator="1" />
 
     <EditText
         android:id="@+id/emailLoginId"
@@ -38,12 +38,12 @@
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/senhaLoginId"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_constraintRight_creator="1" />
 
     <EditText
         android:id="@+id/senhaLoginId"
@@ -60,12 +60,12 @@
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/botaoLogarId"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_constraintRight_creator="1" />
 
     <TextView
         android:id="@+id/registraId"
@@ -85,9 +85,9 @@
         android:id="@+id/imageView"
         android:layout_width="385dp"
         android:layout_height="214dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailLoginId"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:srcCompat="@drawable/logo"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/emailLoginId" />
+        app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>

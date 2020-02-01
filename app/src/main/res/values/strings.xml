@@ -4,4 +4,5 @@
     <string name="login_senha">Digite sua senha</string>
     <string name="action_settings">Configurações</string>
     <string name="action_sair">Sair</string>
+    <string name="textoConfirma">As informações abaixo estão corretas?</string>
 </resources>
