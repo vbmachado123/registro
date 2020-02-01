@@ -1,6 +1,7 @@
 package victor.machado.com.br.registro;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,52 +16,55 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ConfirmaActivity extends AppCompatActivity {
+public class ConfirmaActivity extends Activity {
 
-    private TextView recuperaEnd;
-    private TextView recuperaNome;
-    private TextView recuperaRg;
-    private TextView recuperaCpf;
-    private TextView recuperaCelular;
-    private TextView recuperaResponsabilidade;
+    private TextView exibeEndereco;
+    private TextView exibeNome;
+    private TextView exibeRg;
+    private TextView exibeCpf;
+    private TextView exibeCelular;
+    private TextView exibeResponsabilidade;
 
     private Button naoBotao;
     private Button simBotao;
+
+    private Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_confirma);
-        recuperaEnd = (TextView) findViewById(R.id.confirmaEnd);
-        recuperaNome = (TextView) findViewById(R.id.confirmaNome);
-        recuperaRg = (TextView) findViewById(R.id.confirmaRg);
-        recuperaCpf = (TextView) findViewById(R.id.confirmaCpf);
-        recuperaCelular = (TextView) findViewById(R.id.confirmaCelular);
-        recuperaResponsabilidade = (TextView) findViewById(R.id.confirmaResponsabilidade);
+        exibeEndereco = (TextView) findViewById(R.id.confirmaEnd);
+        exibeNome = (TextView) findViewById(R.id.confirmaNome);
+        exibeRg = (TextView) findViewById(R.id.confirmaRg);
+        exibeCpf = (TextView) findViewById(R.id.confirmaCpf);
+        exibeCelular = (TextView) findViewById(R.id.confirmaCelular);
+        exibeResponsabilidade = (TextView) findViewById(R.id.confirmaResponsabilidade);
+
 
         //Recuperando as informações do cliente
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
+          final Intent intent = getIntent();
+         Bundle extras = intent.getExtras();
 
-        //Concatenando informações para confirmação
-        String exibeEndereco = "Endereço: " + extras.getString("endereco");
-        String exibeNome = "Nome: " + extras.getString("nome");
-        String exibeRg = "Rg: " + extras.getString("rg");
-        String exibeCpf = "Cpf: " + extras.getString("cpf");
-        String exibeCelular = "Celular: " + extras.getString("celular");
-        String exibeResponsabilidade = "O morador é: " + extras.getString("responsabilidade");
-
-        //Exibindo informações para confirmação
-        recuperaEnd.setText(exibeEndereco);
-        recuperaNome.setText(exibeNome);
-        recuperaRg.setText(exibeRg);
-        recuperaCpf.setText(exibeCpf);
-        recuperaCelular.setText(exibeCelular);
-        recuperaResponsabilidade.setText(exibeResponsabilidade);
+        //Recuperando informações
+          final String recuperaEnd =  extras.getString("endereco");
+          final String recuperaNome =  extras.getString("nome");
+          final String recuperaRg =  extras.getString("rg");
+          final String recuperaCpf =  extras.getString("cpf");
+          final String recuperaCelular =  extras.getString("celular");
+          final String recuperaResponsabilidade =  extras.getString("responsabilidade");
 
         naoBotao = (Button) findViewById(R.id.botaoNao);
         simBotao = (Button) findViewById(R.id.botaoSim);
+
+        //Exibindo informações para confirmação
+        exibeEndereco.setText("Endereço: " + recuperaEnd);
+        exibeNome.setText("Nome: " + recuperaNome);
+        exibeRg.setText("Rg: " + recuperaRg);
+        exibeCpf.setText("Cpf: " + recuperaCpf);
+        exibeCelular.setText("Celular: " + recuperaCelular);
+        exibeResponsabilidade.setText("O morador é: " + recuperaResponsabilidade);
 
         naoBotao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +82,18 @@ public class ConfirmaActivity extends AppCompatActivity {
                         ActivityCompat.requestPermissions(ConfirmaActivity.this,
                         new String[] {Manifest.permission.CAMERA}, 0);
                 }
+
+                bundle.putString("endereco", recuperaEnd.toString());
+                bundle.putString("nome", recuperaNome.toString());
+                bundle.putString("rg", recuperaRg.toString());
+                bundle.putString("cpf", recuperaCpf.toString());
+                bundle.putString("celular", recuperaCelular.toString());
+                bundle.putString("responsabilidade", recuperaResponsabilidade.toString());
+
+                Intent i = new Intent(ConfirmaActivity.this, ImagemActivity.class);
+                i.putExtras(bundle);
+                startActivity(i);
+
                 salvaNoBanco();
             }
         });
@@ -87,13 +103,6 @@ public class ConfirmaActivity extends AppCompatActivity {
     public void salvaNoBanco(){
 
         Toast.makeText(this, "Salvando no banco...!", Toast.LENGTH_SHORT).show();
-
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        String endereco = extras.getString("endereco");
-        Intent i = new Intent(ConfirmaActivity.this, ImagemActivity.class);
-        i.putExtras(extras);
-        startActivity(i);
 
     }
 

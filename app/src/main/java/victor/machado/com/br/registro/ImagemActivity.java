@@ -44,20 +44,27 @@ public class ImagemActivity extends AppCompatActivity {
 
         if(requestCode == CAMERA && resultCode == RESULT_OK) {
 
-            Bundle extras = data.getExtras();
+            final Intent intent = getIntent();
+            Bundle extra= intent.getExtras(); //Recupera as informações
+
+            Bundle extras = data.getExtras(); //Recupera a imagem
             Bitmap imagem = (Bitmap) extras.get("data");
 
-           String enderecoFinal = extras.getString("endereco");
-           String nomeFinal = extras.getString("nome");
+            caminhoDaImagem = uriImagem.getPath();
 
-            Toast.makeText(this, enderecoFinal, Toast.LENGTH_SHORT).show();
+            String endereco = extra.getString("endereco");
+            String nome = extra.getString("nome");
+            String Rg = extra.getString("rg");
+            String Cpf = extra.getString("cpf");
+            String Celular = extra.getString("celular");
+            String Responsabilidade = extra.getString("responsabilidade");
+
+          //  Toast.makeText(this, endereco, Toast.LENGTH_SHORT).show();
 
             imagemDocumento.setImageBitmap(imagem);
 
                 Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uriImagem);
                 sendBroadcast(novaIntent);
-
-                caminhoDaImagem = uriImagem.getPath();
 
                 Toast.makeText(this, caminhoDaImagem, Toast.LENGTH_LONG).show();
 
