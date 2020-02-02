@@ -1,7 +1,9 @@
 package victor.machado.com.br.registro;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,9 @@ import android.widget.Toast;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import model.Formulario;
+import model.FormularioDAO;
+
 public class MainActivity extends AppCompatActivity {
 
     //Informações gerais
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioProprietario;
     private RadioButton radioMoradorResponsavel;
+    private Formulario formulario = null;
 
     private String opcaoEscolhida="";
 
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Registro");
         setSupportActionBar(toolbar);
+
 
         //Campos de texto
         endereco = (EditText) findViewById(R.id.endClienteId);
@@ -86,25 +93,79 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Recuperando o formulário para atualizar
+        Intent it = getIntent();
+        if(it.hasExtra("formulario")){
+
+            //Recuperando informação
+            formulario = (Formulario) it.getSerializableExtra("formulario");
+
+            //Setando para o usuário
+            endereco.setText(formulario.getEndereco());
+            nome.setText(formulario.getNome());
+            rg.setText(formulario.getRg());
+            cpf.setText(formulario.getCpf());
+            celular.setText(formulario.getCelular());
+
+        }
+
         botaoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, ConfirmaActivity.class);
-
-                Bundle bundle = new Bundle();
-                bundle.putString("endereco", endereco.getText().toString());
-                bundle.putString("nome", nome.getText().toString());
-                bundle.putString("rg", rg.getText().toString());
-                bundle.putString("cpf", cpf.getText().toString());
-                bundle.putString("celular", celular.getText().toString());
-                bundle.putString("responsabilidade", opcaoEscolhida.toString());
-
-                intent.putExtras(bundle);
-
-                startActivity(intent);
+                if(formulario != null){
+                    AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Atenção")
+                            .setMessage("Deseja gerar um novo PDF?")
+                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                        atualizaBanco();
+                                }
+                            })
+                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                        geraDoc();
+                                }
+                            }).create();
+                    dialog.show();
+                } else {
+                    geraDoc();
+                }
             }
         });
+    }
+
+    public void geraDoc(){
+
+        Bundle bundle = new Bundle();
+        bundle.putString("endereco", endereco.getText().toString());
+        bundle.putString("nome", nome.getText().toString());
+        bundle.putString("rg", rg.getText().toString());
+        bundle.putString("cpf", cpf.getText().toString());
+        bundle.putString("celular", celular.getText().toString());
+        bundle.putString("responsabilidade", opcaoEscolhida.toString());
+
+        Intent intent = new Intent(MainActivity.this, ConfirmaActivity.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
+
+    public void atualizaBanco(){
+
+        formulario.setEndereco(endereco.getText().toString());
+        formulario.setNome(nome.getText().toString());
+        formulario.setRg(rg.getText().toString());
+        formulario.setCpf(cpf.getText().toString());
+        formulario.setCelular(celular.getText().toString());
+        formulario.setResponsabilidade(opcaoEscolhida.toString());
+
+        FormularioDAO dao = new FormularioDAO(MainActivity.this);
+        dao.atualizar(formulario);
+
+        Toast.makeText(MainActivity.this, "Formulário atualizado com sucesso!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -122,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.itemConfiguracoes:
-                Toast.makeText(this, "Botão Configurações Selecionado", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.item_lista:
                 Intent i = new Intent(MainActivity.this, ListarFormsActivity.class);

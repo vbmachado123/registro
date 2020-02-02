@@ -1,23 +1,29 @@
 package victor.machado.com.br.registro;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Formulario;
+import model.FormularioAdapter;
 import model.FormularioDAO;
 
 public class ListarFormsActivity extends AppCompatActivity {
@@ -56,9 +62,10 @@ public class ListarFormsActivity extends AppCompatActivity {
         formularios = dao.obterTodos();
         formulariosFiltrados.addAll(formularios);
 
-        ArrayAdapter<Formulario> adaptador = new ArrayAdapter<Formulario>(
-                             this, R.layout.lista_documentos, formulariosFiltrados);
+        FormularioAdapter adaptador = new FormularioAdapter(this, formulariosFiltrados);
+
         listView.setAdapter(adaptador);
+        registerForContextMenu(listView); //Recuperando qual documento foi selecionado
     }
 
     @Override
@@ -77,8 +84,6 @@ public class ListarFormsActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_lista, menu);
 
-        try{
-
             SearchView sv = (SearchView) menu.findItem(R.id.item_pesquisa).getActionView();
 
             sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -96,10 +101,6 @@ public class ListarFormsActivity extends AppCompatActivity {
                     return false;
                 }
             });
-        }catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(this, "Não foi possivel realizar procura", Toast.LENGTH_SHORT).show();
-        }
 
         return true;
     }
@@ -130,7 +131,6 @@ public class ListarFormsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Botão Configurações Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item_pesquisa:
-                pesquisar();
                 return true;
             case  R.id.item_sincroniza:
                 Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_SHORT).show();
@@ -140,7 +140,44 @@ public class ListarFormsActivity extends AppCompatActivity {
         }
     }
 
-    public void pesquisar(){
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater i = getMenuInflater();
+        i.inflate(R.menu.menu_contexto, menu);
+    }
 
+    public void excluir(MenuItem item){
+
+        AdapterView.AdapterContextMenuInfo menuInfo =
+                ( AdapterView.AdapterContextMenuInfo ) item.getMenuInfo();
+
+        final Formulario formExcluir = formulariosFiltrados.get(menuInfo.position);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Atenção")
+                .setMessage("Realmente deseja excluir o formulário?")
+                .setNegativeButton("Cancelar", null)
+                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        formulariosFiltrados.remove(formExcluir);
+                        formularios.remove(formExcluir);
+                        dao.excluir(formExcluir);
+                        listView.invalidateViews();
+
+                    }
+                }).create();
+        dialog.show();
+    }
+
+    public void atualizar(MenuItem item){
+
+        AdapterView.AdapterContextMenuInfo menuInfo =
+        (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final Formulario formAtualizar = formulariosFiltrados.get(menuInfo.position);
+        Intent it = new Intent(this, MainActivity.class);
+        it.putExtra("formulario", formAtualizar);
+        startActivity(it);
     }
 }

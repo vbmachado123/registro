@@ -58,4 +58,24 @@ public class FormularioDAO {
         return formularios;
 
     }
+
+    public void excluir(Formulario f){
+
+        banco.delete("documentos", "id = ?", new String[]{f.getId().toString()} );
+
+    }
+
+    public void atualizar(Formulario formulario) {
+
+        ContentValues values = new ContentValues();
+        values.put("endereco", formulario.getEndereco());
+        values.put("nome", formulario.getNome());
+        values.put("rg", formulario.getRg());
+        values.put("cpf", formulario.getCpf());
+        values.put("celular", formulario.getCelular());
+        values.put("responsabilidade", formulario.getResponsabilidade());
+
+        banco.update("documentos", values, "id = ?",
+                new String[]{formulario.getId().toString()});
+    }
 }
