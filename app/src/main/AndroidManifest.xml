@@ -27,7 +27,8 @@
         <activity android:name=".ImagemActivity" />
         <activity android:name=".AssinaturaActivity" />
         <activity android:name=".ExibePDFActivity" />
-        <activity android:name=".ListarFormsActivity"></activity>
+        <activity android:name=".ListarFormsActivity" />
+        <activity android:name=".ConfiguracoesActivity"></activity>
     </application>
 
 </manifest>

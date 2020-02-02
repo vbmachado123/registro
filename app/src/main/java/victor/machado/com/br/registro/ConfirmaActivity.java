@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -98,7 +99,6 @@ public class ConfirmaActivity extends AppCompatActivity {
 
                 }
             });
-
     }
 
     @Override
@@ -108,6 +108,34 @@ public class ConfirmaActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_confirma, menu);
 
         return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch ( item.getItemId() ) {
+            case R.id.itemSair:
+                Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.itemConfiguracoes:
+                Intent i = new Intent(ConfirmaActivity.this, ConfiguracoesActivity.class);
+                startActivity(i);
+                Toast.makeText(this, "Botão Configurações Selecionado", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_lista:
+                Intent intent = new Intent(ConfirmaActivity.this, ListarFormsActivity.class);
+                startActivity(intent);
+                return true;
+            case  R.id.item_sincroniza:
+                Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void confirmaSaida(Intent intent){
 
     }
 }

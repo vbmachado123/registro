@@ -10,8 +10,6 @@
 <include android:id="@+id/toolbar"
     layout="@layout/toolbar"/>
 
-
-
     <EditText
         android:id="@+id/endClienteId"
         android:layout_width="match_parent"

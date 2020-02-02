@@ -119,16 +119,17 @@ public class MainActivity extends AppCompatActivity {
 
         switch ( item.getItemId() ) {
             case R.id.itemSair:
-                Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.itemConfiguracoes:
-                Toast.makeText(this, "Botão Configurações Selecionado", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Botão Configurações Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.item_pesquisa:
-                Toast.makeText(this, "Botão Pesquisar Selecionado", Toast.LENGTH_LONG).show();
+            case R.id.item_lista:
+                Intent i = new Intent(MainActivity.this, ListarFormsActivity.class);
+                startActivity(i);
                 return true;
             case  R.id.item_sincroniza:
-                Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

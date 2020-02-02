@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".ListarFormsActivity">
 
     <item android:id="@+id/itemConfiguracoes" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never"/>
@@ -9,9 +9,12 @@
         android:title="@string/action_sair"
         android:orderInCategory="200" app:showAsAction="never"/>
 
-    <item android:id="@+id/item_lista" android:title="Lista"
-       android:orderInCategory="300" app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_library_books"
+    <item android:id="@+id/item_pesquisa"
+        android:title="Pesquisa"
+        android:orderInCategory="300"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:icon="@drawable/ic_search"
         />
 
     <item android:id="@+id/item_sincroniza" android:title="Sincronizar"
