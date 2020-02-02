@@ -21,7 +21,7 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import model.Formulario;
-import model.FormularioDAO;
+import helper.FormularioDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Registro");
         setSupportActionBar(toolbar);
-
 
         //Campos de texto
         endereco = (EditText) findViewById(R.id.endClienteId);
@@ -165,7 +164,9 @@ public class MainActivity extends AppCompatActivity {
         FormularioDAO dao = new FormularioDAO(MainActivity.this);
         dao.atualizar(formulario);
 
-        Toast.makeText(MainActivity.this, "Formulário atualizado com sucesso!", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Formulário atualizado com sucesso!", Toast.LENGTH_SHORT).show();
+
+        limpar();
     }
 
     @Override
@@ -193,8 +194,21 @@ public class MainActivity extends AppCompatActivity {
             case  R.id.item_sincroniza:
                 Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
+            case  R.id.item_limpa:
+                 limpar();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void limpar(){
+
+        endereco.setText("");
+        nome.setText("");
+        rg.setText("");
+        cpf.setText("");
+        celular.setText("");
+
     }
 }

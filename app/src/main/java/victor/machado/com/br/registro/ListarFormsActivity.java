@@ -1,6 +1,5 @@
 package victor.machado.com.br.registro;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -23,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Formulario;
-import model.FormularioAdapter;
-import model.FormularioDAO;
+import helper.FormularioAdapter;
+import helper.FormularioDAO;
 
 public class ListarFormsActivity extends AppCompatActivity {
 
@@ -95,8 +93,6 @@ public class ListarFormsActivity extends AppCompatActivity {
                 @Override
                 public boolean onQueryTextChange(String s) {
 
-                    System.out.println("Digitou: " + s);
-
                     procuraFormulario(s);
                     return false;
                 }
@@ -112,6 +108,9 @@ public class ListarFormsActivity extends AppCompatActivity {
         for (Formulario f : formularios){
 
             if(f.getNome().toLowerCase().contains(texto.toLowerCase())){
+                formulariosFiltrados.add(f);
+            }
+            if(f.getEndereco().toLowerCase().contains(texto.toLowerCase())){
                 formulariosFiltrados.add(f);
             }
         }

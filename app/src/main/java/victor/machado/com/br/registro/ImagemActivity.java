@@ -30,6 +30,8 @@ public class ImagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagem);
 
+        Toast.makeText(this, "Fotografe o RG/RNE ou CNH \n  do cliente para gerar o PDF", Toast.LENGTH_LONG).show();
+
         File diretorio = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File imagem = new File(diretorio.getPath() + "/" + System.currentTimeMillis() + ".jpg");
         uriImagem  = Uri.fromFile(imagem);
@@ -43,7 +45,7 @@ public class ImagemActivity extends AppCompatActivity {
         assinarDoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ImagemActivity.this, AssinaturaActivity.class);
+                Intent intent = new Intent(ImagemActivity.this, ExibePDFActivity.class);
                 startActivity(intent);
             }
         });
@@ -55,30 +57,15 @@ public class ImagemActivity extends AppCompatActivity {
 
         if(requestCode == CAMERA && resultCode == RESULT_OK) {
 
-            final Intent intent = getIntent();
-            Bundle extra= intent.getExtras(); //Recupera as informações
-
             Bundle extras = data.getExtras(); //Recupera a imagem
             Bitmap imagem = (Bitmap) extras.get("data");
 
             caminhoDaImagem = uriImagem.getPath();
 
-            String endereco = extra.getString("endereco");
-            String nome = extra.getString("nome");
-            String Rg = extra.getString("rg");
-            String Cpf = extra.getString("cpf");
-            String Celular = extra.getString("celular");
-            String Responsabilidade = extra.getString("responsabilidade");
-
             imagemDocumento.setImageBitmap(imagem);
 
                 Intent novaIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uriImagem);
                 sendBroadcast(novaIntent);
-
-            //Setando as informações para a última ACTIVITY
-
-
-               //Toast.makeText(this, caminhoDaImagem, Toast.LENGTH_LONG).show();
 
         } else{
 

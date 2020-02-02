@@ -19,4 +19,9 @@
         android:icon="@drawable/ic_autorenew"
         />
 
+    <item android:id="@+id/item_limpa" android:title="Limpar"
+        android:orderInCategory="500" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_cancel"
+        />
+
 </menu>

@@ -1,4 +1,4 @@
-package model;
+package helper;
 
 import android.app.Activity;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import model.Formulario;
 import victor.machado.com.br.registro.R;
 
 /**

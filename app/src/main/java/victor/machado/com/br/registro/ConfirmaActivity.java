@@ -1,9 +1,10 @@
 package victor.machado.com.br.registro;
 
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import model.Formulario;
-import model.FormularioDAO;
+import helper.FormularioDAO;
 
 public class ConfirmaActivity extends AppCompatActivity {
 
@@ -95,7 +96,7 @@ public class ConfirmaActivity extends AppCompatActivity {
                     long id = dao.inserir(f);
 
                     Intent i = new Intent(ConfirmaActivity.this, ExibePDFActivity.class);
-                   // startActivity(i);
+                    startActivity(i);
 
                 }
             });
@@ -108,7 +109,6 @@ public class ConfirmaActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_confirma, menu);
 
         return true;
-
     }
 
     @Override
@@ -119,13 +119,10 @@ public class ConfirmaActivity extends AppCompatActivity {
                 Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.itemConfiguracoes:
-                Intent i = new Intent(ConfirmaActivity.this, ConfiguracoesActivity.class);
-                startActivity(i);
-                Toast.makeText(this, "Botão Configurações Selecionado", Toast.LENGTH_SHORT).show();
+                confirmaSaida(ConfiguracoesActivity.class);
                 return true;
             case R.id.item_lista:
-                Intent intent = new Intent(ConfirmaActivity.this, ListarFormsActivity.class);
-                startActivity(intent);
+                confirmaSaida(ListarFormsActivity.class);
                 return true;
             case  R.id.item_sincroniza:
                 Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_SHORT).show();
@@ -135,7 +132,20 @@ public class ConfirmaActivity extends AppCompatActivity {
         }
     }
 
-    public void confirmaSaida(Intent intent){
+    public void confirmaSaida(final Class c){
 
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Atenção")
+                .setMessage("Confirma saída?" +
+                        " As informações serão perdidas!")
+                .setNegativeButton("Cancelar", null)
+                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ConfirmaActivity.this, c);
+                        startActivity(intent);
+                    }
+                }).create();
+        dialog.show();
     }
 }

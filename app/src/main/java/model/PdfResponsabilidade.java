@@ -46,6 +46,8 @@ public class PdfResponsabilidade {
 
     private String assinaturaResponsavel = "Assinatura do interessado";
 
+    private String qLinha = "  "; //Para não ficar bagunçado
+
     //Fontes
     private Font tituloFonte = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD); //Fonte p/ o titulo em NEGRITO
     private Font corpoFonte = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL); //Fonte p/ o texto normal
@@ -134,4 +136,6 @@ public class PdfResponsabilidade {
     public String getAssinaturaResponsavel() {
         return assinaturaResponsavel;
     }
+
+    public String getqLinha() {return qLinha;}
 }

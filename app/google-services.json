@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "33121909596",
+    "firebase_url": "https://registro-8b462.firebaseio.com",
+    "project_id": "registro-8b462",
+    "storage_bucket": "registro-8b462.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33121909596:android:2f5d7650e85ea5dc5a9f99",
+        "android_client_info": {
+          "package_name": "victor.machado.com.br.registro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33121909596-n6o3ok6kj0gsojcd74963ehvbnv55b8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "victor.machado.com.br.registro",
+            "certificate_hash": "a6b5dad11790fa4778973d3ae8b04ef4b5f6fb0c"
+          }
+        },
+        {
+          "client_id": "33121909596-pmqmigsmnf0e451ed8i3ig2tdnuddo2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB57J3VAMLSd3i10lt9KDuHzAXHlhSn9B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33121909596-pmqmigsmnf0e451ed8i3ig2tdnuddo2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

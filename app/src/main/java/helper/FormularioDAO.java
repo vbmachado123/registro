@@ -1,4 +1,4 @@
-package model;
+package helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Conexao;
+import model.Formulario;
 
 /**
  * Created by victor on 01/02/20.
@@ -52,11 +55,8 @@ public class FormularioDAO {
             f.setResponsabilidade(cursor.getString(6));
 
             formularios.add(f);
-
         }
-
         return formularios;
-
     }
 
     public void excluir(Formulario f){
