@@ -11,7 +11,7 @@ public class Preferencias {
 
     private Context contexto;
     private SharedPreferences preferences;
-    private final String NOME_ARQUIVO = "whatsapp.preferencias";
+    private final String NOME_ARQUIVO = "registro.preferencias";
     private final int MODE = 0;
     private SharedPreferences.Editor editor;
 

@@ -57,6 +57,5 @@ public class FormularioAdapter extends BaseAdapter {
         nome.setText(f.getNome());
 
         return v;
-
     }
 }

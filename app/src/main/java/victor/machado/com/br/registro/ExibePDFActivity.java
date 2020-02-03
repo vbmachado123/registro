@@ -1,6 +1,7 @@
 package victor.machado.com.br.registro;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
@@ -28,14 +29,13 @@ public class ExibePDFActivity extends AppCompatActivity {
 
     private static final int STORAGE_CODE = 1000;
     private FormularioDAO dao;
-    private Formulario f = new Formulario();
+    private Formulario f = null;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exibe_pdf);
-
-        Toast.makeText(this, f.getNome(), Toast.LENGTH_SHORT).show();
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
 
@@ -53,15 +53,18 @@ public class ExibePDFActivity extends AppCompatActivity {
             //Versao do android anterior ao Marshmallow
             //salvaPdf();
         }
-
     }
 
     private void salvaPdf() {
 
         PdfResponsabilidade pdf = new PdfResponsabilidade(); //Recuperando o texto para o pdf
         Document documento = new Document(); //Cria o obj do doc
+        String caminho = Environment.getExternalStorageDirectory() + "/";
 
-        String caminhoPDF = Environment.getExternalStorageDirectory() + "/" + f.getEndereco() + ".pdf";
+        String caminhoPDF = caminho + f.getEndereco() + ".pdf";
+
+        String caminhoAssinatura = caminho + "Assinatura.png";
+      //  ImageData data = ImageDataFactory
 
         try{
             //Criando a instância para escrever o doc
@@ -153,26 +156,5 @@ public class ExibePDFActivity extends AppCompatActivity {
 
     //Método para criar a Pasta do App e salvar o arquivo nela
     private void salvarDocumento(String nomeDocumento) throws IOException {
-
-        //Criar a pasta do arquivo.
-        File folder = new File(Environment.getExternalStorageDirectory() + "/Registro");
-        if(folder.exists()){
-            folder.mkdir();
-        }
-        String nomeArquivo = "Endereço";
-        File arquivo = new File(Environment.getExternalStorageDirectory() + "/Registro/" + nomeArquivo);
-        try{
-            FileOutputStream salvar = new FileOutputStream(arquivo);
-            //salvar.write(temporatio.getBytes());
-            salvar.close();
-
-            Toast.makeText(this, "Arquivo gerado com sucesso..!", Toast.LENGTH_SHORT).show();
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-            Toast.makeText(this, "Arquivo não encontrado!", Toast.LENGTH_SHORT).show();
-        }catch (IOException e){
-            e.printStackTrace();
-            Toast.makeText(this, "Erro!", Toast.LENGTH_SHORT).show();
-        }
     }
 }

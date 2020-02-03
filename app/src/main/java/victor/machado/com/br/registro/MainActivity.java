@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.google.firebase.auth.FirebaseAuth;
 
+import helper.ConfiguracaoFirebase;
 import model.Formulario;
 import helper.FormularioDAO;
 
@@ -36,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioMoradorResponsavel;
     private Formulario formulario = null;
 
+    private FirebaseAuth usuarioAutenticacao;
+
     private String opcaoEscolhida="";
 
     private Button botaoEnviar;
 
     private Toolbar toolbar;
-
-    public static final int CONSTANTE_CADASTRO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Registro");
         setSupportActionBar(toolbar);
+
+        //Valida sessão
+        usuarioAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         //Campos de texto
         endereco = (EditText) findViewById(R.id.endClienteId);
@@ -181,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch ( item.getItemId() ) {
             case R.id.itemSair:
-                Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_SHORT).show();
+               deslogarUsuario();
                 return true;
             case R.id.itemConfiguracoes:
                 Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
@@ -202,13 +207,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void limpar(){
+    private void deslogarUsuario() {
+        usuarioAutenticacao.signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
+    public void limpar(){
         endereco.setText("");
         nome.setText("");
         rg.setText("");
         cpf.setText("");
         celular.setText("");
-
     }
 }

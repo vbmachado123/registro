@@ -25,6 +25,37 @@ public class FormularioDAO {
         banco = conexao.getWritableDatabase();
     }
 
+    public Formulario buscarFormularioPeloID(int formID) {
+
+        Formulario formulario = null;
+
+        banco = conexao.getReadableDatabase();
+
+        String sql = "SELECT * FROM documentos WHERE id =" + formID;
+
+        Cursor cursor = banco.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+
+            String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
+            String nome = cursor.getString(cursor.getColumnIndex("nome"));
+            String rg = cursor.getString(cursor.getColumnIndex("rg"));
+            String cpf = cursor.getString(cursor.getColumnIndex("cpf"));
+            String opcaoEscolhida = cursor.getString(cursor.getColumnIndex("responsabilidade"));
+
+            formulario = new Formulario();
+
+            formulario.setId(formID);
+            formulario.setEndereco(endereco);
+            formulario.setNome(nome);
+            formulario.setRg(rg);
+            formulario.setCpf(cpf);
+            formulario.setResponsabilidade(opcaoEscolhida);
+        }
+
+        return formulario;
+    }
+
     public long inserir(Formulario formulario) {
 
         ContentValues values = new ContentValues();

@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import helper.ConfiguracaoFirebase;
 import model.Formulario;
 import helper.FormularioDAO;
 
@@ -33,6 +36,8 @@ public class ConfirmaActivity extends AppCompatActivity {
     private Bundle bundle = new Bundle();
     private Toolbar toolbar;
 
+    private FirebaseAuth usuarioAutenticacao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,8 @@ public class ConfirmaActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Registro");
         setSupportActionBar(toolbar);
+
+        usuarioAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         exibeEndereco = (TextView) findViewById(R.id.confirmaEnd);
         exibeNome = (TextView) findViewById(R.id.confirmaNome);
@@ -95,9 +102,10 @@ public class ConfirmaActivity extends AppCompatActivity {
                     f.setResponsabilidade(recuperaResponsabilidade.toString());
                     long id = dao.inserir(f);
 
-                    Intent i = new Intent(ConfirmaActivity.this, ExibePDFActivity.class);
-                    startActivity(i);
+                   //Toast.makeText(ConfirmaActivity.this, "id: " + id, Toast.LENGTH_SHORT).show();
 
+                    Intent i = new Intent(ConfirmaActivity.this, ImagemActivity.class);
+                    startActivity(i);
                 }
             });
     }
@@ -116,7 +124,7 @@ public class ConfirmaActivity extends AppCompatActivity {
 
         switch ( item.getItemId() ) {
             case R.id.itemSair:
-                Toast.makeText(this, "Botão Sair Selecionado", Toast.LENGTH_SHORT).show();
+                deslogarUsuario();
                 return true;
             case R.id.itemConfiguracoes:
                 confirmaSaida(ConfiguracoesActivity.class);
@@ -130,6 +138,14 @@ public class ConfirmaActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void deslogarUsuario() {
+
+        usuarioAutenticacao.signOut();
+        Intent intent = new Intent(ConfirmaActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void confirmaSaida(final Class c){
