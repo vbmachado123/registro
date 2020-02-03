@@ -74,7 +74,7 @@ public class Formulario implements Serializable {
 
     @Override
     public String toString(){
-            return nome;
+            return getId() + "-" + getNome();
     }
 }
 

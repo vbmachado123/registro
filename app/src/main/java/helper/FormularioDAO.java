@@ -25,7 +25,7 @@ public class FormularioDAO {
         banco = conexao.getWritableDatabase();
     }
 
-    public Formulario buscarFormularioPeloID(int formID) {
+    public Formulario pegaForm(int formID) {
 
         Formulario formulario = null;
 
@@ -91,9 +91,8 @@ public class FormularioDAO {
     }
 
     public void excluir(Formulario f){
-
-        banco.delete("documentos", "id = ?", new String[]{f.getId().toString()} );
-
+        banco.delete("documentos", "id = ?",
+                new String[]{f.getId().toString()} );
     }
 
     public void atualizar(Formulario formulario) {

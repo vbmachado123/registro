@@ -5,4 +5,5 @@
     <string name="action_settings">Configurações</string>
     <string name="action_sair">Sair</string>
     <string name="textoConfirma">As informações abaixo estão corretas?</string>
+    <string name="texto_imagem">Está foto será inserida no documento</string>
 </resources>

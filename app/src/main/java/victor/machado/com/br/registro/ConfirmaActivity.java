@@ -33,7 +33,7 @@ public class ConfirmaActivity extends AppCompatActivity {
     private Button naoBotao;
     private Button simBotao;
 
-    private Bundle bundle = new Bundle();
+    private Formulario formulario;
     private Toolbar toolbar;
 
     private FirebaseAuth usuarioAutenticacao;
@@ -61,12 +61,12 @@ public class ConfirmaActivity extends AppCompatActivity {
          Bundle extras = intent.getExtras();
 
         //Recuperando informações
-          final String recuperaEnd =  extras.getString("endereco");
-          final String recuperaNome =  extras.getString("nome");
-          final String recuperaRg =  extras.getString("rg");
-          final String recuperaCpf =  extras.getString("cpf");
-          final String recuperaCelular =  extras.getString("celular");
-          final String recuperaResponsabilidade =  extras.getString("responsabilidade");
+          final String recuperaEnd = extras.getString("endereco");
+          final String recuperaNome = extras.getString("nome");
+          final String recuperaRg = extras.getString("rg");
+          final String recuperaCpf = extras.getString("cpf");
+          final String recuperaCelular = extras.getString("celular");
+          final String recuperaResponsabilidade = extras.getString("responsabilidade");
 
         naoBotao = (Button) findViewById(R.id.botaoNao);
         simBotao = (Button) findViewById(R.id.botaoSim);

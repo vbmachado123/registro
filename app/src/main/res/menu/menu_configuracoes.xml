@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".ConfiguracoesActivity">
+
+    <item android:id="@+id/itemConfiguracoes" android:title="@string/action_settings"
+        android:orderInCategory="100" app:showAsAction="never"/>
+
+    <item android:id="@+id/itemSair"
+        android:title="@string/action_sair"
+        android:orderInCategory="200" app:showAsAction="never"/>
+
+    <item android:id="@+id/item_lista" android:title="Lista"
+        android:orderInCategory="300" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_library_books"
+        />
+
+    <item android:id="@+id/item_sincroniza" android:title="Sincronizar"
+        android:orderInCategory="400" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_autorenew"
+        />
+
+</menu>

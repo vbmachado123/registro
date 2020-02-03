@@ -26,7 +26,7 @@
         android:roundIcon="@drawable/icon_8"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ImagemActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,10 +38,10 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ConfirmaActivity" />
         <activity android:name=".AssinaturaActivity" />
-        <activity android:name=".SplashScreen" />
+        <activity android:name=".ImagemActivity" />
         <activity android:name=".ExibePDFActivity" />
         <activity android:name=".ListarFormsActivity" />
-        <activity android:name=".ConfiguracoesActivity"></activity>
+        <activity android:name=".ConfiguracoesActivity" />
     </application>
 
 </manifest>

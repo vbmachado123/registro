@@ -16,6 +16,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ImagemActivity extends AppCompatActivity {
 
@@ -40,6 +44,7 @@ public class ImagemActivity extends AppCompatActivity {
 
     private String caminhoDaImagem;
     private Uri uri;
+    private Uri file;
 
     OutputStream outputStream;
 
@@ -48,21 +53,29 @@ public class ImagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagem);
 
-        Toast.makeText(this, "Fotografe o RG/RNE ou CNH \n  do cliente para gerar o PDF", Toast.LENGTH_LONG).show();
-
         imagemDocumento = (ImageView) findViewById(R.id.imgDocumento);
         assinarDoc = (Button) findViewById(R.id.botaoAssinar);
 
-        assinarDoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    abrirCamera();
-            }
-        });
+        abrirCamera();
     }
 
-    public void abrirCamera() {
-        Toast.makeText(this, "Método abrir câmera chamado!", Toast.LENGTH_SHORT).show();
+    private void abrirCamera() {
+
+        Intent i = new
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(i.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(i, 1);
+        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap img = (Bitmap) extras.get("data");
+            imagemDocumento.setImageBitmap(img);
+        }
+    }
 }

@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioProprietario;
     private RadioButton radioMoradorResponsavel;
     private Formulario formulario = null;
-
     private FirebaseAuth usuarioAutenticacao;
 
     private String opcaoEscolhida="";
@@ -55,20 +54,12 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Registro");
         setSupportActionBar(toolbar);
 
-        //Valida sessão
-        usuarioAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
         //Campos de texto
         endereco = (EditText) findViewById(R.id.endClienteId);
         nome = (EditText) findViewById(R.id.nomeClienteId);
         rg = (EditText) findViewById(R.id.rgClienteId);
         cpf = (EditText) findViewById(R.id.cpfClienteId);
         celular = (EditText) findViewById(R.id.celularClienteId);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioProprietario = (RadioButton) findViewById(R.id.proprietarioId);
-        radioMoradorResponsavel = (RadioButton) findViewById(R.id.moradorResponsavelId);
-
-        botaoEnviar = (Button) findViewById(R.id.gerarDocId);
 
         //Mascaras de campo
         SimpleMaskFormatter smfRG = new SimpleMaskFormatter("NN.NNN.NNN");
@@ -83,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
         MaskTextWatcher mtwCell = new MaskTextWatcher(celular, smfCell);
         celular.addTextChangedListener(mtwCell);
 
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+
+        //Valida sessão
+        usuarioAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+        botaoEnviar = (Button) findViewById(R.id.gerarDocId);
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -96,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         //Recuperando o formulário para atualizar
         Intent it = getIntent();
@@ -142,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void geraDoc(){
-
         Bundle bundle = new Bundle();
         bundle.putString("endereco", endereco.getText().toString());
         bundle.putString("nome", nome.getText().toString());
@@ -153,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, ConfirmaActivity.class);
         intent.putExtras(bundle);
-
         startActivity(intent);
     }
 
