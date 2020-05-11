@@ -38,22 +38,6 @@ public class ExibePDFActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exibe_pdf);
 
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)==
-                    PackageManager.PERMISSION_DENIED){
-                //Permissao negada, solicitando-a
-                String[] permissoes = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permissoes, STORAGE_CODE);
-
-            }else{
-                //Permissao aceita
-                //salvaPdf();
-            }
-        }else{
-            //Versao do android anterior ao Marshmallow
-            //salvaPdf();
-        }
     }
 
     private void salvaPdf() {
@@ -141,19 +125,7 @@ public class ExibePDFActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults) {
 
-        switch (requestCode){
-            case STORAGE_CODE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
-                }else{
-                    Toast.makeText(this, "Erro ao Salvar Arquivo", Toast.LENGTH_SHORT).show();
-                }
-        }
-
-    }
 
     //Método para criar a Pasta do App e salvar o arquivo nela
     private void salvarDocumento(String nomeDocumento) throws IOException {

@@ -1,8 +1,14 @@
 package telas;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,12 +27,21 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.firebase.auth.FirebaseAuth;
 
-import helper.ConfiguracaoFirebase;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import util.ConfiguracaoFirebase;
 import model.Formulario;
 import helper.FormularioDAO;
+import util.Permissao;
 import victor.machado.com.br.registro.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Context context = this;
 
     //Informações gerais
     private EditText endereco;
@@ -51,9 +66,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Permissao permissao = new Permissao();
+        permissao.Permissoes(this);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Registro");
         setSupportActionBar(toolbar);
+
+        File mydir = new File(Environment.getExternalStorageDirectory() + "/Registro");
+        String caminhoLogo = mydir + "/Imagens/" + "logo" + ".png";
+
+        final File file = new File(caminhoLogo);
 
         //Campos de texto
         endereco = (EditText) findViewById(R.id.endClienteId);
@@ -96,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //Recuperando o formulário para atualizar
         Intent it = getIntent();
         if(it.hasExtra("formulario")){
@@ -110,13 +132,12 @@ public class MainActivity extends AppCompatActivity {
             rg.setText(formulario.getRg());
             cpf.setText(formulario.getCpf());
             celular.setText(formulario.getCelular());
-
         }
 
         botaoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(!(file.exists())) criarPasta();
                 if(formulario != null){
                     AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                             .setTitle("Atenção")
@@ -139,6 +160,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void criarPasta() {
+
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.logo);
+        Drawable mDrawable = new BitmapDrawable(getResources(), bitmap);
+        BitmapDrawable drawable = ((BitmapDrawable) mDrawable);
+        Bitmap bitmap1 = drawable.getBitmap();
+        OutputStream out = null;
+        File mydir = new File(Environment.getExternalStorageDirectory() + "/Registro");
+        String caminhoLogo = mydir + "/Imagens/" + "logo" + ".png";
+        File logo = new File(caminhoLogo);
+
+        if( !(logo.exists()) ){
+            mydir.mkdir();
+            try {
+                out = new FileOutputStream(caminhoLogo);
+                bitmap1.compress(Bitmap.CompressFormat.PNG, 50, out);
+                out.flush();
+                out.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void geraDoc(){

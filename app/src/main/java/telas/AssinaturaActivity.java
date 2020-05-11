@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
 import model.Assinatura;
@@ -29,6 +30,7 @@ public class AssinaturaActivity extends AppCompatActivity {
     private Assinatura assinatura;
     private Button salvar;
     private Toolbar toolbar;
+    private String caminho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class AssinaturaActivity extends AppCompatActivity {
         toolbar.setTitle("Assinatura Cliente");
         setSupportActionBar(toolbar);
 
-        final RelativeLayout parent = (RelativeLayout) findViewById(R.id.signImageParent);
+        final RelativeLayout parent = (RelativeLayout) findViewById(R.id.rlAssinatura);
         assinatura = new Assinatura(this);
         parent.addView(assinatura);
 
@@ -48,20 +50,28 @@ public class AssinaturaActivity extends AppCompatActivity {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 parent.setDrawingCacheEnabled(true);
                 Bitmap b = parent.getDrawingCache();
 
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(Environment.getExternalStorageDirectory() + "/" + "Assinatura.png");
+                FileOutputStream out = null;
+                File mydir = new File(Environment.getExternalStorageDirectory() + "/CheckGuincho");
+                if(mydir.exists()) mydir.mkdir();
+                caminho = mydir + "/Imagens/" + "Assinatura" + ".jpg";
+
+                try{
+                    out = new FileOutputStream(caminho);
+                    b.compress(Bitmap.CompressFormat.JPEG, 30, out);
+                    out.flush();
+                    out.close();
+                    Toast.makeText(AssinaturaActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
-                b.compress(Bitmap.CompressFormat.PNG, 95, fos);
             }
         });
-
     }
-
 }

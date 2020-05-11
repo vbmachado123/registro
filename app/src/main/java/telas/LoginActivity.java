@@ -21,9 +21,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import helper.Base64Custom;
-import helper.ConfiguracaoFirebase;
-import helper.Preferencias;
+import util.Base64Custom;
+import util.ConfiguracaoFirebase;
+import util.Permissao;
+import util.Preferencias;
 import model.Usuario;
 import victor.machado.com.br.registro.R;
 
@@ -45,6 +46,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Permissao permissao = new Permissao();
+        permissao.Permissoes(this);
 
         verificaUsuarioLogado();
 
