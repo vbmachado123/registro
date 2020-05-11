@@ -3,13 +3,22 @@ package telas;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.github.barteksc.pdfviewer.PDFView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
@@ -28,106 +37,67 @@ import victor.machado.com.br.registro.R;
 
 public class ExibePDFActivity extends AppCompatActivity {
 
-    private static final int STORAGE_CODE = 1000;
-    private FormularioDAO dao;
-    private Formulario f = null;
-    private int id;
+
+    private PDFView view;
+    private FloatingActionButton fabEnviar;
+    private File file;
+    private Uri uri;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exibe_pdf);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Documento Inspeção");
+        setSupportActionBar(toolbar);
+
+        //Recuperando as informações do cliente
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        view = (PDFView) findViewById(R.id.pdfview);
+
+        /*Log.i("Doc", extras.getString("documento"));*/
+
+        file = new File(extras.getString("documento"));
+
+        view.fromFile(file)
+                .password(null)
+                .defaultPage(0)
+                .enableSwipe(true)
+                .swipeHorizontal(false)
+                .enableDoubletap(true)
+                .load();
     }
 
-    private void salvaPdf() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_exibe, menu);
+        return true;
+    }
 
-        PdfResponsabilidade pdf = new PdfResponsabilidade(); //Recuperando o texto para o pdf
-        Document documento = new Document(); //Cria o obj do doc
-        String caminho = Environment.getExternalStorageDirectory() + "/";
-
-        String caminhoPDF = caminho + f.getEndereco() + ".pdf";
-
-        String caminhoAssinatura = caminho + "Assinatura.png";
-      //  ImageData data = ImageDataFactory
-
-        try{
-            //Criando a instância para escrever o doc
-            PdfWriter.getInstance(documento, new FileOutputStream(caminhoPDF));
-            //Abrindo o doc para a edição/leitura
-            documento.open();
-
-            //Inserindo as informações
-            Paragraph titulo =  new Paragraph(pdf.getTituloPagina(), pdf.getTituloFonte());
-            titulo.setAlignment(Element.ALIGN_CENTER);
-            documento.add(titulo);
-
-            documento.add(new Phrase(pdf.getqLinha())); //LINHA EM BRANCO
-            documento.add(new Phrase(pdf.getTextoInteressado(), pdf.getCorpoFonte()));
-            documento.add(new Phrase(pdf.getqLinha())); //LINHA EM BRANCO
-
-            Paragraph paragraph = new Paragraph(pdf.getTextoEndereco() + f.getEndereco(), pdf.getCorpoFonte());
-            paragraph.setAlignment(Element.ALIGN_LEFT);
-            documento.add(paragraph);
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            documento.add(new Phrase(pdf.getE(), pdf.getCorpoFonte()));
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            if (f.getResponsabilidade() == "Proprietário") {
-                documento.add(new Phrase(pdf.getOpcaoMarcada()
-                        + pdf.getTextoOpcaoProprietario(), pdf.getCorpoFonte()));
-                documento.add(new Phrase("\n" + pdf.getOpcaoDesmarcada()
-                        + pdf.getTextoOpcaoMoradorResponsavel(), pdf.getCorpoFonte()));
-            }
-            else {
-                    documento.add(new Phrase( pdf.getOpcaoDesmarcada()
-                            + pdf.getTextoOpcaoProprietario() , pdf.getCorpoFonte()));
-                    documento.add(new Phrase("\n" + pdf.getOpcaoMarcada()
-                            + pdf.getTextoOpcaoMoradorResponsavel() , pdf.getCorpoFonte()));
-                }
-
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            //Texto meio
-            documento.add(new Phrase(pdf.getTextoMeioNeg1(), pdf.getCorpoFonteBold()));
-            documento.add(new Phrase(pdf.getTextoMeioNormal(), pdf.getCorpoFonte()));
-            documento.add(new Phrase(pdf.getTextoMeioNeg2(), pdf.getCorpoFonteBold()));
-
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            documento.add(new Paragraph(pdf.getDocNaoApresentado(), pdf.getCorpoFonte()));
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-            documento.add(new Paragraph(pdf.getDocIPTU(), pdf.getCorpoFonte()));
-
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            documento.add(new Phrase(pdf.getNomeResponsavel() + f.getNome() + "\n", pdf.getCorpoFonte()));
-            documento.add(new Phrase(pdf.getRgRNE() + f.getRg() + "\n", pdf.getCorpoFonte()));
-            documento.add(new Phrase(pdf.getCpf() + f.getCpf() + "\n", pdf.getCorpoFonte()));
-
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            documento.add(new Phrase(pdf.getInfObrigatoria(), pdf.getCorpoFonte()));
-
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-            documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
-
-            documento.add(new Phrase(pdf.getAssinaturaResponsavel(), pdf.getCorpoFonte()));
-
-            documento.close();
-
-            Toast.makeText(this, "Documento gerado", Toast.LENGTH_SHORT).show();
-        }catch(Exception e){
-
-            Toast.makeText(this, "Não foi possível gerar o pdf, tente novamente", Toast.LENGTH_LONG).show();
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item_salvar:
+                Toast.makeText(this, "Documento salvo em: " + file, Toast.LENGTH_SHORT).show();
+                acessaActivity(MainActivity.class);
+                return true;
+            case R.id.item_home:
+                acessaActivity(MainActivity.class);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
-
-
-    //Método para criar a Pasta do App e salvar o arquivo nela
-    private void salvarDocumento(String nomeDocumento) throws IOException {
+    private void acessaActivity(Class c){
+        Intent it = new Intent(ExibePDFActivity.this, c);
+        startActivity(it);
     }
+
 }

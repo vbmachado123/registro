@@ -17,11 +17,15 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
@@ -62,6 +66,14 @@ public class ImagemActivity extends AppCompatActivity {
         imagemDocumento = (ImageView) findViewById(R.id.imgDocumento);
         assinarDoc = (Button) findViewById(R.id.botaoAssinar);
 
+        assinarDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(ImagemActivity.this, AssinaturaActivity.class);
+                startActivity(it);
+            }
+        });
+
         tirarFoto(currentDocPath, CAMERA);
     }
 
@@ -89,7 +101,7 @@ public class ImagemActivity extends AppCompatActivity {
     private File getImageFile(String path) throws IOException{
         String root = Environment.getExternalStorageDirectory().getAbsolutePath();
         String nomePasta = "/Registro/Imagens";
-        String arquivo = path + System.currentTimeMillis() + ".jpg";
+        String arquivo = "Documento.jpg";
 
         File mydir = new File(root, nomePasta);
         File fileFoto = new File(mydir, arquivo);
@@ -109,5 +121,23 @@ public class ImagemActivity extends AppCompatActivity {
             imagemDocumento.setImageBitmap(imagemDoc);
             verificaDoc = 1;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_limpar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.item_limpar:
+                tirarFoto(currentDocPath, CAMERA);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
