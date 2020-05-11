@@ -19,17 +19,15 @@ public class FormularioDAO {
 
     private Conexao conexao;
     private SQLiteDatabase banco;
+    private Formulario formulario = null;
 
     public FormularioDAO(Context context){
         conexao = new Conexao(context);
         banco = conexao.getWritableDatabase();
+        banco = conexao.getReadableDatabase();
     }
 
     public Formulario pegaForm(int formID) {
-
-        Formulario formulario = null;
-
-        banco = conexao.getReadableDatabase();
 
         String sql = "SELECT * FROM documento WHERE id =" + formID;
 
@@ -46,6 +44,29 @@ public class FormularioDAO {
             formulario = new Formulario();
 
             formulario.setId(formID);
+            formulario.setEndereco(endereco);
+            formulario.setNome(nome);
+            formulario.setRg(rg);
+            formulario.setCpf(cpf);
+            formulario.setResponsabilidade(opcaoEscolhida);
+        }
+
+        return formulario;
+    }
+
+    public Formulario recupera(){
+
+        Cursor cursor = banco.rawQuery("SELECT * FROM documento", null);
+
+        while (cursor.moveToNext()){
+            String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
+            String nome = cursor.getString(cursor.getColumnIndex("nome"));
+            String rg = cursor.getString(cursor.getColumnIndex("rg"));
+            String cpf = cursor.getString(cursor.getColumnIndex("cpf"));
+            String opcaoEscolhida = cursor.getString(cursor.getColumnIndex("responsabilidade"));
+
+            formulario = new Formulario();
+
             formulario.setEndereco(endereco);
             formulario.setNome(nome);
             formulario.setRg(rg);

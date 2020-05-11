@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,14 +31,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        //Criando e verificando pasta do dispositivo
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-           checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-           != PackageManager.PERMISSION_GRANTED) {
-
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
-
-        }
+        View decorView = getWindow().getDecorView();
+        // Esconde tanto a barra de navegação e a barra de status .
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
 
         gifRegistro = (GifImageView) findViewById(R.id.gifRegistro);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -64,17 +62,4 @@ public class SplashScreen extends AppCompatActivity {
         }, 3000);
     }
 
-    //Código necessário para a permissão à memoria interna
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults) {
-       switch (requestCode){
-           case 1000:
-               if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                   Toast.makeText(this, "Permissão Concedida!", Toast.LENGTH_SHORT).show();
-               } else{
-                   Toast.makeText(this, "Permissão Negada...!", Toast.LENGTH_SHORT).show();
-                    finish();
-               }
-       }
-    }
 }

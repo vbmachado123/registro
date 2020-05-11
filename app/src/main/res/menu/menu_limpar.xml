@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="telas.ConfiguracoesActivity">
+
+    <item android:id="@+id/item_limpar" android:title="Lista"
+        android:orderInCategory="300" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_delete"
+        />
+
+</menu>
