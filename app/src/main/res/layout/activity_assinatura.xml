@@ -5,16 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/signImageParent"
-    tools:context="victor.machado.com.br.registro.AssinaturaActivity">
+    tools:context="telas.AssinaturaActivity">
 
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-    <Button
-        android:id="@+id/salvar"
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/toolbar"
+        android:padding="8dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="14dp"
-        android:text="Salvar" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:background="@android:color/white"
+            android:id="@+id/rlAssinatura"/>
+
+        <Button
+            android:id="@+id/salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_style"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/distancia"
+            android:text="Salvar" />
+
+    </LinearLayout>
 </RelativeLayout>

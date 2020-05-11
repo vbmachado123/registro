@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    tools:context="victor.machado.com.br.registro.ConfiguracoesActivity">
+    tools:context="telas.ConfiguracoesActivity">
 
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar" />

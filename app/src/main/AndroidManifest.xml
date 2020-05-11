@@ -26,22 +26,22 @@
         android:roundIcon="@drawable/icon_8"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name="telas.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".CadastroActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ConfirmaActivity" />
-        <activity android:name=".AssinaturaActivity" />
-        <activity android:name=".ImagemActivity" />
-        <activity android:name=".ExibePDFActivity" />
-        <activity android:name=".ListarFormsActivity" />
-        <activity android:name=".ConfiguracoesActivity" />
+        <activity android:name="telas.MainActivity" />
+        <activity android:name="telas.CadastroActivity" />
+        <activity android:name="telas.LoginActivity" />
+        <activity android:name="telas.ConfirmaActivity" />
+        <activity android:name="telas.AssinaturaActivity" />
+        <activity android:name="telas.ImagemActivity" />
+        <activity android:name="telas.ExibePDFActivity" />
+        <activity android:name="telas.ListarFormsActivity" />
+        <activity android:name="telas.ConfiguracoesActivity" />
     </application>
 
 </manifest>

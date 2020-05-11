@@ -4,131 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    tools:context="victor.machado.com.br.registro.MainActivity">
+    tools:context="telas.MainActivity">
 
 <include android:id="@+id/toolbar"
     layout="@layout/toolbar"/>
 
-    <EditText
-        android:id="@+id/endClienteId"
+    <ScrollView
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
-        android:ems="10"
-        android:hint="Endereço"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="true"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/nomeClienteId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/endClienteId"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:ems="10"
-        android:hint="Nome"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="true"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary"/>
+        <LinearLayout
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/rgClienteId"
-        android:layout_width="@dimen/largura_Campo"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/nomeClienteId"
-        android:selectAllOnFocus="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Rg"
-        android:inputType="number"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary" />
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/endClienteId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="140dp"
+                android:hint="Endereço"
+                android:inputType="textPersonName"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
 
-    <EditText
-        android:id="@+id/cpfClienteId"
-        android:layout_width="@dimen/largura_Campo"
-        android:layout_height="wrap_content"
-        android:selectAllOnFocus="true"
-        android:layout_alignBaseline="@+id/rgClienteId"
-        android:layout_alignBottom="@+id/rgClienteId"
-        android:layout_toEndOf="@+id/rgClienteId"
-        android:layout_toRightOf="@+id/rgClienteId"
-        android:ems="10"
-        android:hint="Cpf"
-        android:inputType="number"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary" />
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/nomeClienteId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/endClienteId"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/distancia"
+                android:hint="Nome"
+                android:inputType="textPersonName"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary"/>
 
-    <EditText
-        android:id="@+id/celularClienteId"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/rgClienteId"
-        android:selectAllOnFocus="true"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="Celular"
-        android:inputType="number"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary" />
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/rgClienteId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="wrap_content"
+                android:selectAllOnFocus="true"
+                android:layout_marginTop="@dimen/distancia"
+                android:ems="10"
+                android:hint="Rg"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/celularClienteId"
-        android:layout_marginTop="21dp"
-        android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="@dimen/distancia"
+                android:background="@drawable/edittext_style"
+                android:id="@+id/cpfClienteId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="wrap_content"
+                android:selectAllOnFocus="true"
+                android:hint="Cpf"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
 
-        <RadioButton
-            android:id="@+id/proprietarioId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText5"
-            android:layout_marginEnd="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_toLeftOf="@+id/cpfClienteId"
-            android:layout_toStartOf="@+id/cpfClienteId"
-            android:text="Proprietário"
-            android:textColor="@color/colorPrimary" />
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/celularClienteId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="wrap_content"
+                android:selectAllOnFocus="true"
+                android:layout_marginTop="@dimen/distancia"
+                android:hint="Celular"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
 
-        <RadioButton
-            android:id="@+id/moradorResponsavelId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText5"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:layout_toEndOf="@+id/radioGroup"
-            android:layout_toRightOf="@+id/radioGroup"
-            android:text="Morador Responsável"
-            android:textColor="@color/colorPrimary" />
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/celularClienteId"
+                android:layout_marginTop="21dp"
+                android:orientation="horizontal">
 
-    </RadioGroup>
+                <RadioButton
+                    android:id="@+id/proprietarioId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText5"
+                    android:layout_marginEnd="26dp"
+                    android:layout_marginRight="26dp"
+                    android:text="Proprietário"
+                    android:textColor="@color/colorPrimary" />
 
-    <Button
-        android:id="@+id/gerarDocId"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:text="Enviar Cadastro"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_centerHorizontal="true" />
+                <RadioButton
+                    android:id="@+id/moradorResponsavelId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText5"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
+                    android:text="Morador Responsável"
+                    android:textColor="@color/colorPrimary" />
 
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/gerarDocId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style"
+                android:text="@string/textobotaoenviar"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

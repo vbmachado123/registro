@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="victor.machado.com.br.registro.ExibePDFActivity">
+    tools:context="telas.ExibePDFActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:padding="8dp"
+        android:id="@+id/pdfview"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEnviar"
+            app:fabSize="auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:srcCompat="@drawable/ic_send"
+            tools:ignore="VectorDrawableCompat" />
+    </LinearLayout>
+
+</RelativeLayout>
