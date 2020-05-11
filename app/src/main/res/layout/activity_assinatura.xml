@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/signImageParent"
     tools:context="telas.AssinaturaActivity">
 
     <include android:id="@+id/toolbar"
@@ -22,7 +21,7 @@
             android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:background="@android:color/white"
+            android:background="@drawable/fundoassinatura"
             android:id="@+id/rlAssinatura"/>
 
         <Button

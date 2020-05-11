@@ -3,7 +3,7 @@ package model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
-import helper.ConfiguracaoFirebase;
+import util.ConfiguracaoFirebase;
 
 /**
  * Created by victor on 02/02/20.

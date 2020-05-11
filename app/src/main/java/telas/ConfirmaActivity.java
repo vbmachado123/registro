@@ -18,7 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import helper.ConfiguracaoFirebase;
+import util.ConfiguracaoFirebase;
 import model.Formulario;
 import helper.FormularioDAO;
 import victor.machado.com.br.registro.R;

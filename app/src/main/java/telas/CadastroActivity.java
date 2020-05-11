@@ -19,9 +19,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
-import helper.Base64Custom;
-import helper.ConfiguracaoFirebase;
-import helper.Preferencias;
+import util.Base64Custom;
+import util.ConfiguracaoFirebase;
+import util.Preferencias;
 import model.Usuario;
 import victor.machado.com.br.registro.R;
 
