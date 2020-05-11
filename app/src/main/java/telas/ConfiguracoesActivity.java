@@ -1,7 +1,10 @@
-package victor.machado.com.br.registro;
+package telas;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import victor.machado.com.br.registro.R;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 

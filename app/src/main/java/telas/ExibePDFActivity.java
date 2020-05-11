@@ -1,14 +1,14 @@
-package victor.machado.com.br.registro;
+package telas;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -24,6 +24,7 @@ import java.io.IOException;
 import model.Formulario;
 import helper.FormularioDAO;
 import model.PdfResponsabilidade;
+import victor.machado.com.br.registro.R;
 
 public class ExibePDFActivity extends AppCompatActivity {
 
@@ -141,7 +142,7 @@ public class ExibePDFActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults) {
 
         switch (requestCode){
             case STORAGE_CODE:

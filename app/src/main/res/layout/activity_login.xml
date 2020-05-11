@@ -1,93 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo"
-    tools:context="victor.machado.com.br.registro.LoginActivity">
+    tools:context="telas.LoginActivity">
 
-    <Button
-        android:id="@+id/botaoLogarId"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="198dp"
-        android:text="Login"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/senhaLoginId"
-        app:layout_constraintRight_toRightOf="@+id/senhaLoginId"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/emailLoginId"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:hint="@string/login_email"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/senhaLoginId"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        <LinearLayout
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/senhaLoginId"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:hint="@string/login_senha"
-        android:inputType="textPassword"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/botaoLogarId"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="385dp"
+                android:layout_height="214dp"
+                app:srcCompat="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/registraId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Não possui conta? Registre-se"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botaoLogarId"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/emailLoginId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_email"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="385dp"
-        android:layout_height="214dp"
-        app:layout_constraintBottom_toTopOf="@+id/emailLoginId"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/logo" />
+            <EditText
+                android:layout_marginTop="@dimen/distancia"
+                android:background="@drawable/edittext_style"
+                android:id="@+id/senhaLoginId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_senha"
+                android:inputType="textPassword"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:layout_marginTop="@dimen/distancia"
+                android:id="@+id/botaoLogarId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style"
+                android:text="Login"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:padding="8dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/botaoLogarGoogleId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_white_style"
+                android:drawableLeft="@drawable/g"
+                android:text="Login com google" />
+
+            <Button
+                android:padding="8dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/botaoLoginFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_white_style"
+                android:drawableLeft="@drawable/facebook"
+                android:text="Login com facebook" />
+
+            <TextView
+                android:layout_marginTop="@dimen/distancia"
+                android:id="@+id/registraId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Não possui conta? Registre-se"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center_horizontal" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
