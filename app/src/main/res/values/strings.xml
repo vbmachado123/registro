@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="direito_registro"> Registro @ 2019-2020 </string>
+    <string name="app_version">Versão: 2.7.1</string>
+
     <string name="app_name">Registro</string>
     <string name="login_email">Digite seu e-mail</string>
     <string name="login_senha">Digite sua senha</string>

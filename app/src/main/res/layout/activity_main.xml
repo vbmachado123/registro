@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorBackground"
     android:layout_height="match_parent"
     tools:context="telas.MainActivity">
 
@@ -20,12 +21,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="viewEnd"
+                android:text="@string/app_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end" />
+
             <EditText
                 android:background="@drawable/edittext_style"
                 android:id="@+id/endClienteId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="80dp"
                 android:hint="Endereço"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="true"
@@ -92,6 +101,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:theme="@style/MyCheckBoxStyle"
                     android:id="@+id/proprietarioId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -102,6 +112,7 @@
                     android:textColor="@color/colorPrimary" />
 
                 <RadioButton
+                    android:theme="@style/MyCheckBoxStyle"
                     android:id="@+id/moradorResponsavelId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
