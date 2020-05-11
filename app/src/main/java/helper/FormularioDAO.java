@@ -31,7 +31,7 @@ public class FormularioDAO {
 
         banco = conexao.getReadableDatabase();
 
-        String sql = "SELECT * FROM documentos WHERE id =" + formID;
+        String sql = "SELECT * FROM documento WHERE id =" + formID;
 
         Cursor cursor = banco.rawQuery(sql, null);
 
@@ -66,13 +66,13 @@ public class FormularioDAO {
         values.put("celular", formulario.getCelular());
         values.put("responsabilidade", formulario.getResponsabilidade());
 
-       return banco.insert("documentos", null, values);
+       return banco.insert("documento", null, values);
     }
 
     public List<Formulario> obterTodos(){
 
         List<Formulario> formularios = new ArrayList<>();
-        Cursor cursor = banco.query("documentos", new String[]{"id", "endereco", "nome", "rg", "cpf",
+        Cursor cursor = banco.query("documento", new String[]{"id", "endereco", "nome", "rg", "cpf",
                                         "celular", "responsabilidade"}, null, null, null, null, null);
 
         while(cursor.moveToNext()){
@@ -91,7 +91,7 @@ public class FormularioDAO {
     }
 
     public void excluir(Formulario f){
-        banco.delete("documentos", "id = ?",
+        banco.delete("documento", "id = ?",
                 new String[]{f.getId().toString()} );
     }
 
@@ -105,7 +105,7 @@ public class FormularioDAO {
         values.put("celular", formulario.getCelular());
         values.put("responsabilidade", formulario.getResponsabilidade());
 
-        banco.update("documentos", values, "id = ?",
+        banco.update("documento", values, "id = ?",
                 new String[]{formulario.getId().toString()});
     }
 }
