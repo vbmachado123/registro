@@ -24,7 +24,7 @@ public class Conexao extends SQLiteOpenHelper {
             "idInspecao INTEGER, caminhoPdf TEXT)";
 
     private String tabelaConfiguracao = "CREATE TABLE IF NOT EXISTS configuracao (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "endereco TEXT, loginServidor TEXT, senhaServidor TEXT, exibeAssinatura TEXT)";
+            "email TEXT, nome TEXT, exibeAssinatura INTEGER, caminhoPasta TEXT)";
 
     @Override
     public void onCreate(SQLiteDatabase db) {

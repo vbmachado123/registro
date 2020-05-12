@@ -2,6 +2,7 @@ package telas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
+import helper.ConfiguracaoDAO;
+import model.Configuracao;
 import util.Base64Custom;
 import util.ConfiguracaoFirebase;
 import util.Preferencias;
@@ -91,6 +94,15 @@ public class CadastroActivity extends AppCompatActivity {
 
                     Preferencias preferencias = new Preferencias(CadastroActivity.this);
                     preferencias.salvarDados(identificadorUsuario, usuario.getNome());
+
+                    Configuracao configuracao = new Configuracao();
+                    ConfiguracaoDAO configuracaoDAO = new ConfiguracaoDAO(CadastroActivity.this);
+
+                    String caminhoPasta = Environment.getExternalStorageDirectory() + "/Registro";
+                    configuracao.setEmail(email.getText().toString());
+                    configuracao.setNome(nome.getText().toString());
+                    configuracao.setCaminhoPasta(caminhoPasta);
+                    configuracaoDAO.inserir(configuracao);
 
                     abrirLoginUsuario();
 

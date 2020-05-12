@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
@@ -8,7 +8,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="colorControlNormal">@color/colorPrimary</item>
     </style>
 
     <style name="MyCheckBoxStyle">
@@ -17,5 +17,19 @@
         <item name="colorControlHighlight">@android:color/white</item>
     </style>
 
+    <style name="MyEditTextTheme">
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert" tools:targetApi="lollipop">
+        <item name="android:actionMenuTextColor">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:colorAccent">@color/colorPrimary</item>
+        <item name="android:itemBackground">@android:color/white</item>
+        <item name="background">@android:color/white</item>
+    </style>
 
 </resources>

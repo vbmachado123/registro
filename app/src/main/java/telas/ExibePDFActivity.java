@@ -40,7 +40,6 @@ import static androidx.core.content.FileProvider.getUriForFile;
 
 public class ExibePDFActivity extends AppCompatActivity {
 
-
     private PDFView view;
     private FloatingActionButton fabEnviar;
     private File file;
