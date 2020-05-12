@@ -1,8 +1,11 @@
 package helper;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import model.Configuracao;
 import model.Pdf;
 import sql.Conexao;
 
@@ -17,6 +20,36 @@ public class PdfDAO {
         banco = conexao.getReadableDatabase();
     }
 
+    public Pdf recupera(){
+        Cursor cursor = banco.rawQuery("SELECT * FROM pdf", null);
 
+        while (cursor.moveToNext()){
+            pdf = new Pdf();
+            pdf.setId(cursor.getInt(0));
+            pdf.setIdFormulario(cursor.getInt(1));
+            pdf.setCaminhoPdf(cursor.getString(2));
+        }
+        return pdf;
+    }
+
+    public long inserir(Pdf pdf) {
+
+        ContentValues values = new ContentValues();
+        values.put("idInspecao", pdf.getIdFormulario());
+        values.put("caminhoPdf", pdf.getCaminhoPdf());
+
+        return banco.insert("pdf", null, values);
+    }
+
+    public Pdf getById(int id){
+        Cursor cursor = banco.rawQuery("SELECT * FROM pdf WHERE idInspecao =" + id, null);
+
+        if (cursor.moveToFirst()){
+            pdf = new Pdf();
+            pdf.setIdFormulario(cursor.getInt(1));
+            pdf.setCaminhoPdf(cursor.getString(2));
+        }
+        return pdf;
+    }
 
 }

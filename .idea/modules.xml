@@ -5,9 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-registro.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-registro.iml" group="registro" />
       <module fileurl="file://$PROJECT_DIR$/app/AndroidStudioProjects-registro-app.iml" filepath="$PROJECT_DIR$/app/AndroidStudioProjects-registro-app.iml" group="registro/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home-victor-AndroidStudioProjects-registro.iml" filepath="$PROJECT_DIR$/home-victor-AndroidStudioProjects-registro.iml" group="registro" />
       <module fileurl="file://$PROJECT_DIR$/registro.iml" filepath="$PROJECT_DIR$/registro.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/registro-app.iml" filepath="$PROJECT_DIR$/app/registro-app.iml" group="registro/app" />
       <module fileurl="file://$PROJECT_DIR$/victor-AndroidStudioProjects-registro.iml" filepath="$PROJECT_DIR$/victor-AndroidStudioProjects-registro.iml" group="registro" />
+      <module fileurl="file://$PROJECT_DIR$/app/victor-AndroidStudioProjects-registro-app.iml" filepath="$PROJECT_DIR$/app/victor-AndroidStudioProjects-registro-app.iml" group="registro/app" />
     </modules>
   </component>
 </project>
