@@ -4,4 +4,5 @@
 
     <item android:title="Excluir" android:onClick="excluir"/>
     <item android:title="Atualizar" android:onClick="atualizar"/>
+    <item android:title="Visualizar" android:onClick="visualizar"/>
 </menu>

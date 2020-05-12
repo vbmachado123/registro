@@ -59,6 +59,7 @@ public class FormularioDAO {
         Cursor cursor = banco.rawQuery("SELECT * FROM documento", null);
 
         while (cursor.moveToNext()){
+            int idInspecao = cursor.getInt(cursor.getColumnIndex("id"));
             String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
             String nome = cursor.getString(cursor.getColumnIndex("nome"));
             String rg = cursor.getString(cursor.getColumnIndex("rg"));
@@ -67,6 +68,7 @@ public class FormularioDAO {
 
             formulario = new Formulario();
 
+            formulario.setId(idInspecao);
             formulario.setEndereco(endereco);
             formulario.setNome(nome);
             formulario.setRg(rg);

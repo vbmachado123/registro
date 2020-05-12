@@ -19,12 +19,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import helper.PdfDAO;
 import model.Formulario;
 import helper.FormularioAdapter;
 import helper.FormularioDAO;
+import model.Pdf;
 import victor.machado.com.br.registro.R;
 
 public class ListarFormsActivity extends AppCompatActivity {
@@ -181,5 +184,22 @@ public class ListarFormsActivity extends AppCompatActivity {
         Intent it = new Intent(this, MainActivity.class);
         it.putExtra("formulario", formAtualizar);
         startActivity(it);
+    }
+
+    public void visualizar(MenuItem item){
+        AdapterView.AdapterContextMenuInfo menuInfo =
+                ( AdapterView.AdapterContextMenuInfo ) item.getMenuInfo();
+
+        final Formulario inspecaoVisualizar = formulariosFiltrados.get(menuInfo.position);
+        Pdf pdf = new PdfDAO(this).getById(inspecaoVisualizar.getId());
+
+        if(pdf != null) {
+            File file = new File(pdf.getCaminhoPdf());
+            if(file.exists()) {
+                Intent it = new Intent(ListarFormsActivity.this, ExibePDFActivity.class);
+                it.putExtra("documento", pdf.getCaminhoPdf());
+                startActivity(it);
+            } else Toast.makeText(this, "Documento indisponível", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "Documento indisponível", Toast.LENGTH_SHORT).show();
     }
 }

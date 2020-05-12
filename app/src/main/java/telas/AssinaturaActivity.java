@@ -26,11 +26,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.UUID;
 
 import helper.FormularioDAO;
+import helper.PdfDAO;
 import model.Assinatura;
 import model.Formulario;
+import model.Pdf;
 import util.GeraPDF;
 import victor.machado.com.br.registro.R;
 
@@ -100,14 +103,17 @@ public class AssinaturaActivity extends AppCompatActivity {
                 if(arquivo.canRead()){
                     String caminhoDocumento = root + nomePasta + "/" + nomeArquivo;
 
-                    /*Pdf pdfModel = new Pdf();
-                    pdfModel.setCaminhoDocumento(caminhoDocumento);
-                    pdfModel.setIdInspecao(i.getId());
-                    PdfDao dao = new PdfDao(FinalizaActivity.this);
-                    dao.inserir(pdfModel);
-*/
+                    Formulario formulario = new FormularioDAO(AssinaturaActivity.this).recupera();
+
+                    Pdf pdfSalva = new Pdf();
+                    PdfDAO dao = new PdfDAO(AssinaturaActivity.this);
+
+                    pdfSalva.setCaminhoPdf(caminhoDocumento);
+                    pdfSalva.setIdFormulario(formulario.getId());
+                    dao.inserir(pdfSalva);
+
                     Intent it = new Intent(AssinaturaActivity.this, ExibePDFActivity.class);
-                    it.putExtra("documento", caminhoDocumento);
+                    it.putExtra("documento", pdfSalva.getCaminhoPdf());
                     startActivity(it);
                 } else {
                     Toast.makeText(AssinaturaActivity.this, "Não foi possível gerar o documento, tente novamente mais tarde", Toast.LENGTH_LONG).show();
