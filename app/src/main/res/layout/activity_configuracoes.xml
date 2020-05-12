@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@android:color/white"
     tools:context="telas.ConfiguracoesActivity">
 
     <include android:id="@+id/toolbar"
@@ -33,6 +33,57 @@
                 tools:ignore="RtlCompat"
                 android:layout_marginTop="@dimen/distancia"/>
 
+            <TableRow
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/email"/>
+
+                <EditText
+                    android:textColor="@color/colorAccent"
+                    style="@style/MyEditTextTheme"
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/nome"/>
+
+                <EditText
+                    android:textColor="@color/colorAccent"
+                    style="@style/MyEditTextTheme"
+                    android:id="@+id/etNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
+            </TableRow>
+
+            <Switch
+                android:layout_marginTop="@dimen/distancia"
+                android:textSize="20sp"
+                android:id="@+id/sExibeAssinatura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Exibir assinatura do fiscal" />
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
@@ -43,6 +94,26 @@
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="@dimen/distancia"
                 android:textSize="24sp" />
+
+            <TableRow
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/email"/>
+
+                <TextView
+                    android:text="@string/email_contato"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </TableRow>
 
             <TextView
                 android:id="@+id/textView5"
@@ -55,18 +126,83 @@
                 android:layout_marginTop="@dimen/distancia"
                 android:textSize="24sp" />
 
+            <TableRow
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/pasta"/>
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/caminhoPasta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp" />
+            </TableRow>
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 tools:ignore="RtlCompat"
-                android:layout_marginLeft="16dp"
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="@dimen/distancia"
                 android:text="Registro"
                 android:textSize="24sp" />
 
+            <com.felipecsl.gifimageview.library.GifImageView
+                android:id="@+id/gifRegistro"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:textColor="@color/configColor"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:text="@string/direito_registro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:layout_marginTop="@dimen/distancia"
+                android:textColor="@color/configColor"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:text="@string/app_version"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="RtlCompat" />
+
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/botaoSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:clickable="true"
+            app:fabSize="auto"
+            app:srcCompat="@drawable/ic_save"
+            tools:ignore="VectorDrawableCompat" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

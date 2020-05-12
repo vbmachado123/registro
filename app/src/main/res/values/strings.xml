@@ -11,4 +11,10 @@
     <string name="textoConfirma">As informações abaixo estão corretas?</string>
     <string name="texto_imagem">Está foto será inserida no documento</string>
     <string name="textobotaoenviar">Enviar Cadastro</string>
+    <string name="pasta">"Local: "</string>
+    <string name="email">Email: </string>
+    <string name="email_contato">" registro@gmail.com"</string>
+    <string name="endereco_servidor">Login:  </string>
+    <string name="senha_servidor">"Senha: "</string>
+    <string name="nome">"Nome: "</string>
 </resources>

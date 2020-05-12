@@ -152,7 +152,7 @@ public class ConfirmaActivity extends AppCompatActivity {
 
     public void confirmaSaida(final Class c){
 
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.DialogStyle)
                 .setTitle("Atenção")
                 .setMessage("Confirma saída?" +
                         " As informações serão perdidas!")
