@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -24,6 +24,7 @@
         android:roundIcon="@drawable/icon_8"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="telas.TesteActivity"></activity>
         <activity android:name="telas.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,11 +36,13 @@
         <activity android:name="telas.CadastroActivity" />
         <activity android:name="telas.LoginActivity" />
         <activity android:name="telas.ConfirmaActivity" />
-        <activity android:name="telas.AssinaturaActivity"
+        <activity
+            android:name="telas.AssinaturaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name="telas.ImagemActivity"
+        <activity
+            android:name="telas.ImagemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

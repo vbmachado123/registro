@@ -234,15 +234,13 @@ public class MainActivity extends AppCompatActivity {
                deslogarUsuario();
                 return true;
             case R.id.itemConfiguracoes:
-                Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
-                startActivity(intent);
+                acessaActivity(ConfiguracoesActivity.class);
                 return true;
             case R.id.item_lista:
-                Intent i = new Intent(MainActivity.this, ListarFormsActivity.class);
-                startActivity(i);
+                acessaActivity(ListarFormsActivity.class);
                 return true;
             case  R.id.item_sincroniza:
-                Toast.makeText(this, "Botão Sincronizar Selecionado", Toast.LENGTH_SHORT).show();
+                acessaActivity(MainActivity.class);
                 return true;
             case  R.id.item_limpa:
                  limpar();
@@ -252,10 +250,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void acessaActivity(Class c){
+        Intent i = new Intent(MainActivity.this, c);
+        startActivity(i);
+    }
+
     private void deslogarUsuario() {
         usuarioAutenticacao.signOut();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        acessaActivity(LoginActivity.class);
         finish();
     }
 

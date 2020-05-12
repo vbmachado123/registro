@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,8 @@ import model.Formulario;
 import helper.FormularioDAO;
 import model.PdfResponsabilidade;
 import victor.machado.com.br.registro.R;
+
+import static androidx.core.content.FileProvider.getUriForFile;
 
 public class ExibePDFActivity extends AppCompatActivity {
 
@@ -71,6 +74,39 @@ public class ExibePDFActivity extends AppCompatActivity {
                 .swipeHorizontal(false)
                 .enableDoubletap(true)
                 .load();
+
+        fabEnviar = (FloatingActionButton) findViewById(R.id.fabEnviar);
+        fabEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    enviarArquivoM();
+                else
+                    enviarArquivo();
+            }
+        });
+    }
+
+
+    private void enviarArquivoM() {
+        Intent enviar = new Intent();
+        uri = getUriForFile(
+                this, "victor.machado.com.br.registro", file);
+        enviar.setAction(Intent.ACTION_SEND);
+        enviar.putExtra(Intent.EXTRA_STREAM, uri);
+        enviar.setType("application/pdf");
+        startActivity(Intent.createChooser(enviar, "Enviar documento via..."));
+    }
+
+    private void enviarArquivo() {
+        Intent enviar = new Intent();
+        uri = Uri.fromFile(file);
+        if(uri != null){
+            enviar.setAction(Intent.ACTION_SEND);
+            enviar.putExtra(Intent.EXTRA_STREAM, uri);
+            enviar.setType("application/pdf");
+            startActivity(Intent.createChooser(enviar, "Enviar documento via..."));
+        } else Toast.makeText(this, "Não foi possível compartilhar o arquivo", Toast.LENGTH_SHORT).show();
     }
 
     @Override

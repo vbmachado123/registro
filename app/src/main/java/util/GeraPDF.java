@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -24,6 +25,11 @@ public class GeraPDF {
     public Document GeraPDF(String destino, Activity activity) throws Exception{
         PdfResponsabilidade pdf = new PdfResponsabilidade(); //Recuperando o texto para o pdf
         Document documento = new Document(); //Cria o obj do doc
+
+        String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String nomePasta = root + "/Registro";
+        String caminhoAssinatura =  nomePasta + "/Imagens/" + "Assinatura" + ".jpg";
+        String caminhoDocumento = nomePasta + "/Imagens/" + "Documento" + ".jpg";
 
         f = new FormularioDAO(activity).recupera();
 
@@ -89,6 +95,18 @@ public class GeraPDF {
         documento.add(new Paragraph(pdf.getqLinha()));//LINHA EM BRANCO
 
         documento.add(new Phrase(pdf.getAssinaturaResponsavel(), pdf.getCorpoFonte()));
+
+        Image assinatura = Image.getInstance(caminhoAssinatura);
+        assinatura.scalePercent(12, 04);
+        assinatura.setAbsolutePosition(50, 335); //400y MEIO DA FOLHA
+        documento.add(assinatura);
+
+        int x = 8, y = 10;
+
+        Image imagemDoc = Image.getInstance(caminhoDocumento);
+        imagemDoc.scalePercent (x, y);
+        imagemDoc.setAbsolutePosition(100,90);
+        documento.add(imagemDoc);
 
         documento.close();
 

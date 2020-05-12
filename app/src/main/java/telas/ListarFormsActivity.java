@@ -44,7 +44,7 @@ public class ListarFormsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listar_docs);
         //Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Registro");
+        toolbar.setTitle("Formulários");
         setSupportActionBar(toolbar);
 
         //Floatting Button
