@@ -60,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_white_style"
+                android:textColor="@color/colorPrimary"
                 android:drawableLeft="@drawable/g"
                 android:text="Login com google" />
 
@@ -70,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_white_style"
+                android:textColor="@color/colorPrimary"
                 android:drawableLeft="@drawable/facebook"
                 android:text="Login com facebook" />
 
