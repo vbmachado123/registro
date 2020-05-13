@@ -2,20 +2,31 @@ package telas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,10 +41,13 @@ import victor.machado.com.br.registro.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private int RC_SIGN_IN = 1;
     private EditText email;
     private EditText senha;
-    private Button botaoLogar;
+    private Button botaoLogar, botaoLoginGoogle, botaoLoginFacebook;
     private TextView textoRegistrar;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     private Usuario usuario;
     private String identificadorUsuarioLogado;
@@ -41,14 +55,24 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference referenceFirebase;
     private FirebaseAuth autenticacao;
     private ValueEventListener valueEventListenerUsuario;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
+
         Permissao permissao = new Permissao();
         permissao.Permissoes(this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         verificaUsuarioLogado();
 
@@ -56,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         senha = (EditText) findViewById(R.id.senhaLoginId);
         botaoLogar = (Button) findViewById(R.id.botaoLogarId);
         textoRegistrar = (TextView) findViewById(R.id.registraId);
+        botaoLoginGoogle = (Button) findViewById(R.id.botaoLogarGoogleId);
 
         botaoLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +93,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        botaoLoginGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logarGoogle();
+            }
+        });
+
         textoRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +108,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void logarGoogle() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private void validarLogin() {
@@ -159,5 +196,55 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
+        try{
+            GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
+            Toast.makeText(LoginActivity.this,"Sucesso ao logar",Toast.LENGTH_SHORT).show();
+            FirebaseGoogleAuth(acc);
+        }
+        catch (ApiException e){
+            Toast.makeText(LoginActivity.this,"Erro ao logar",Toast.LENGTH_SHORT).show();
+            FirebaseGoogleAuth(null);
+        }
+    }
+
+    private void FirebaseGoogleAuth(GoogleSignInAccount acct) {
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        //check if the account is null
+        if (acct != null) {
+            AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+            mAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Sucesso", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+
+                        Preferencias preferencias = new Preferencias(LoginActivity.this);
+                        preferencias.salvarDados(identificadorUsuarioLogado, user.getDisplayName());
+                        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                        abrirTelaPrincipal();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Erro", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        else{
+            Toast.makeText(LoginActivity.this, "Erro na conta", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

@@ -50,6 +50,8 @@ public class ListarFormsActivity extends AppCompatActivity {
         toolbar.setTitle("Formulários");
         setSupportActionBar(toolbar);
 
+        Toast.makeText(this, "Clique longo para abrir opções", Toast.LENGTH_LONG).show();
+
         //Floatting Button
         floatingActionButton = (FloatingActionButton) findViewById(R.id.botaoAdd);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
