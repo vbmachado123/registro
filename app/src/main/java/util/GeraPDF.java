@@ -6,8 +6,10 @@ import android.os.Environment;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
@@ -24,7 +26,8 @@ public class GeraPDF {
 
     public Document GeraPDF(String destino, Activity activity) throws Exception{
         PdfResponsabilidade pdf = new PdfResponsabilidade(); //Recuperando o texto para o pdf
-        Document documento = new Document(); //Cria o obj do doc
+        Rectangle pagesize = new Rectangle(PageSize.A4);
+        Document documento = new Document(pagesize); //Cria o obj do doc
 
         String root = Environment.getExternalStorageDirectory().getAbsolutePath();
         String nomePasta = root + "/Registro";
@@ -101,11 +104,11 @@ public class GeraPDF {
         assinatura.setAbsolutePosition(50, 335); //400y MEIO DA FOLHA
         documento.add(assinatura);
 
-        int x = 8, y = 10;
+        int x = 10, y = 6;
 
         Image imagemDoc = Image.getInstance(caminhoDocumento);
         imagemDoc.scalePercent (x, y);
-        imagemDoc.setAbsolutePosition(100,90);
+        imagemDoc.setAbsolutePosition(50,50);
         documento.add(imagemDoc);
 
         documento.close();
