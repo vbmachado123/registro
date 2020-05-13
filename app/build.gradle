@@ -5,6 +5,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
+        multiDexEnabled true
         applicationId "victor.machado.com.br.registro"
         minSdkVersion 16
         targetSdkVersion 29
@@ -27,6 +28,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.felipecsl:gifimageview:2.1.0'

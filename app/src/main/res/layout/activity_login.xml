@@ -48,32 +48,22 @@
                 android:layout_marginTop="@dimen/distancia"
                 android:id="@+id/botaoLogarId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/altura_Botao"
                 android:background="@drawable/button_style"
                 android:text="Login"
                 android:textColor="@android:color/white" />
 
-            <Button
-                android:padding="8dp"
+            <com.google.android.gms.common.SignInButton
                 android:layout_marginTop="10dp"
                 android:id="@+id/botaoLogarGoogleId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_white_style"
-                android:textColor="@color/colorPrimary"
-                android:drawableLeft="@drawable/g"
-                android:text="Login com google" />
+                android:layout_height="@dimen/altura_Botao" />
 
-            <Button
-                android:padding="8dp"
+            <com.facebook.login.widget.LoginButton
                 android:layout_marginTop="10dp"
                 android:id="@+id/botaoLoginFacebook"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_white_style"
-                android:textColor="@color/colorPrimary"
-                android:drawableLeft="@drawable/facebook"
-                android:text="Login com facebook" />
+                android:layout_height="@dimen/altura_Botao" />
 
             <TextView
                 android:layout_marginTop="@dimen/distancia"

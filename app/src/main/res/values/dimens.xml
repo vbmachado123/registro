@@ -4,7 +4,7 @@
     <dimen name="altura_logo">214dp</dimen>
     <dimen name="largura_Campo">300dp</dimen>
     <dimen name="largura_Botao">100dp</dimen>
-    <dimen name="altura_Botao">70dp</dimen>
+    <dimen name="altura_Botao">44dp</dimen>
     <dimen name="imagem_Documento">200dp</dimen>
     <dimen name="distancia">8dp</dimen>
 </resources>
