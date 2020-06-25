@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -137,29 +140,48 @@ public class MainActivity extends AppCompatActivity {
         botaoEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!(file.exists())) criarPasta();
-                if(formulario != null){
-                    AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                            .setTitle("Atenção")
-                            .setMessage("Deseja gerar um novo PDF?")
-                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                        atualizaBanco();
-                                }
-                            })
-                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                        geraDoc();
-                                }
-                            }).create();
-                    dialog.show();
-                } else {
-                    geraDoc();
-                }
+               boolean prosseguir = validaCampoVazio();
+               if(prosseguir){
+                   if(!(file.exists())) criarPasta();
+                   if(formulario != null){
+                       AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                               .setTitle("Atenção")
+                               .setMessage("Deseja gerar um novo PDF?")
+                               .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+                                       atualizaBanco();
+                                   }
+                               })
+                               .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+                                       geraDoc();
+                                   }
+                               }).create();
+                       dialog.show();
+                   } else {
+                       geraDoc();
+                   }
+               } else {
+                   Toast.makeText(context, "Preencha todas as informações!", Toast.LENGTH_SHORT).show();
+               }
             }
         });
+    }
+
+    private boolean validaCampoVazio() {
+        boolean valida = true;
+        if(endereco.getText().toString().isEmpty())
+            valida = false;
+        if(nome.getText().toString().isEmpty())
+            valida = false;
+        if(rg.getText().toString().isEmpty())
+            valida = false;
+        if(cpf.getText().toString().isEmpty())
+            valida = false;
+
+        return valida;
     }
 
     private void criarPasta() {
@@ -170,13 +192,16 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap1 = drawable.getBitmap();
         OutputStream out = null;
         File mydir = new File(Environment.getExternalStorageDirectory() + "/Registro");
+        File imagem = new File(mydir, "Imagens");
         String caminhoLogo = mydir + "/Imagens/" + "logo" + ".png";
-        File logo = new File(caminhoLogo);
+        File logo = new File(imagem, "logo.png");
 
         if( !(logo.exists()) ){
             mydir.mkdir();
+            imagem.mkdirs();
             try {
-                out = new FileOutputStream(caminhoLogo);
+                logo.createNewFile();
+                out = new FileOutputStream(logo);
                 bitmap1.compress(Bitmap.CompressFormat.PNG, 50, out);
                 out.flush();
                 out.close();
@@ -189,13 +214,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void geraDoc(){
+        if(opcaoEscolhida.isEmpty())
+            opcaoEscolhida="Morador Responsável";
         Bundle bundle = new Bundle();
         bundle.putString("endereco", endereco.getText().toString());
         bundle.putString("nome", nome.getText().toString());
         bundle.putString("rg", rg.getText().toString());
         bundle.putString("cpf", cpf.getText().toString());
         bundle.putString("celular", celular.getText().toString());
-        bundle.putString("responsabilidade", opcaoEscolhida.toString());
+        bundle.putString("responsabilidade", opcaoEscolhida);
 
         Intent intent = new Intent(MainActivity.this, ConfirmaActivity.class);
         intent.putExtras(bundle);

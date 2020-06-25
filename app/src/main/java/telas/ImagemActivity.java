@@ -17,10 +17,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,6 +42,8 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import helper.FormularioDAO;
+import model.Formulario;
 import victor.machado.com.br.registro.R;
 
 public class ImagemActivity extends AppCompatActivity {
@@ -53,16 +57,21 @@ public class ImagemActivity extends AppCompatActivity {
     private Button assinarDoc;
     private static int verificaDoc = 0;
     private Toolbar toolbar;
+    private FormularioDAO dao;
+    private Formulario f = new Formulario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagem);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Imagem Documento");
         setSupportActionBar(toolbar);
-
+         dao = new FormularioDAO(this);
+         f = dao.recupera();
         imagemDocumento = (ImageView) findViewById(R.id.imgDocumento);
         assinarDoc = (Button) findViewById(R.id.botaoAssinar);
 
@@ -101,13 +110,16 @@ public class ImagemActivity extends AppCompatActivity {
     private File getImageFile(String path) throws IOException{
         String root = Environment.getExternalStorageDirectory().getAbsolutePath();
         String nomePasta = "/Registro/Imagens";
-        String arquivo = "Documento.jpg";
+        String arquivo = "Documento" + System.currentTimeMillis() + ".jpg";
 
         File mydir = new File(root, nomePasta);
         File fileFoto = new File(mydir, arquivo);
 
         if(mydir.exists()) mydir.mkdirs();
 
+        f.setCaminhoImagem(String.valueOf(fileFoto));
+        dao.atualizar(f);
+        Log.i("Imagem", f.getCaminhoImagem());
         return fileFoto;
     }
 

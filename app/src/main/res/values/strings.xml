@@ -1,7 +1,7 @@
 <resources>
 
     <string name="direito_registro"> Registro @ 2019-2020 </string>
-    <string name="app_version">Versão: 2.7.2</string>
+    <string name="app_version">Versão: 2.7.3</string>
 
     <string name="facebook_app_id">935889986852459</string>
     <string name="fb_login_protocol_scheme">fb935889986852459</string>
@@ -14,6 +14,8 @@
     <string name="textoConfirma">As informações abaixo estão corretas?</string>
     <string name="texto_imagem">Está foto será inserida no documento</string>
     <string name="textobotaoenviar">Enviar Cadastro</string>
+    <string name="textobotaoIniciar">Iniciar Atendimento</string>
+    <string name="textobotaoExportar">Exportar Tabela</string>
     <string name="pasta">"Local: "</string>
     <string name="email">Email: </string>
     <string name="email_contato">" registro@gmail.com"</string>

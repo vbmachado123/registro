@@ -5,11 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import sql.Conexao;
 import model.Formulario;
+import util.Csv;
 
 /**
  * Created by victor on 01/02/20.
@@ -21,7 +23,7 @@ public class FormularioDAO {
     private SQLiteDatabase banco;
     private Formulario formulario = null;
 
-    public FormularioDAO(Context context){
+    public FormularioDAO(Context context) {
         conexao = new Conexao(context);
         banco = conexao.getWritableDatabase();
         banco = conexao.getReadableDatabase();
@@ -33,14 +35,14 @@ public class FormularioDAO {
 
         Cursor cursor = banco.rawQuery(sql, null);
 
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
 
             String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
             String nome = cursor.getString(cursor.getColumnIndex("nome"));
             String rg = cursor.getString(cursor.getColumnIndex("rg"));
             String cpf = cursor.getString(cursor.getColumnIndex("cpf"));
             String opcaoEscolhida = cursor.getString(cursor.getColumnIndex("responsabilidade"));
-
+            String caminhoFoto = cursor.getString(cursor.getColumnIndex("caminhoImagem"));
             formulario = new Formulario();
 
             formulario.setId(formID);
@@ -49,23 +51,24 @@ public class FormularioDAO {
             formulario.setRg(rg);
             formulario.setCpf(cpf);
             formulario.setResponsabilidade(opcaoEscolhida);
+            formulario.setCaminhoImagem(caminhoFoto);
         }
 
         return formulario;
     }
 
-    public Formulario recupera(){
+    public Formulario recupera() {
 
         Cursor cursor = banco.rawQuery("SELECT * FROM documento", null);
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             int idInspecao = cursor.getInt(cursor.getColumnIndex("id"));
             String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
             String nome = cursor.getString(cursor.getColumnIndex("nome"));
             String rg = cursor.getString(cursor.getColumnIndex("rg"));
             String cpf = cursor.getString(cursor.getColumnIndex("cpf"));
             String opcaoEscolhida = cursor.getString(cursor.getColumnIndex("responsabilidade"));
-
+            String caminhoFoto = cursor.getString(cursor.getColumnIndex("caminhoImagem"));
             formulario = new Formulario();
 
             formulario.setId(idInspecao);
@@ -74,6 +77,7 @@ public class FormularioDAO {
             formulario.setRg(rg);
             formulario.setCpf(cpf);
             formulario.setResponsabilidade(opcaoEscolhida);
+            formulario.setCaminhoImagem(caminhoFoto);
         }
 
         return formulario;
@@ -88,17 +92,18 @@ public class FormularioDAO {
         values.put("cpf", formulario.getCpf());
         values.put("celular", formulario.getCelular());
         values.put("responsabilidade", formulario.getResponsabilidade());
+        values.put("caminhoImagem", formulario.getCaminhoImagem());
 
-       return banco.insert("documento", null, values);
+        return banco.insert("documento", null, values);
     }
 
-    public List<Formulario> obterTodos(){
+    public List<Formulario> obterTodos() {
 
         List<Formulario> formularios = new ArrayList<>();
         Cursor cursor = banco.query("documento", new String[]{"id", "endereco", "nome", "rg", "cpf",
-                                        "celular", "responsabilidade"}, null, null, null, null, null);
+                "celular", "responsabilidade", "caminhoImagem"}, null, null, null, null, null);
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Formulario f = new Formulario();
             f.setId(cursor.getInt(0));
             f.setEndereco(cursor.getString(1));
@@ -107,15 +112,16 @@ public class FormularioDAO {
             f.setCpf(cursor.getString(4));
             f.setCelular(cursor.getString(5));
             f.setResponsabilidade(cursor.getString(6));
+            f.setCaminhoImagem(cursor.getString(7));
 
             formularios.add(f);
         }
         return formularios;
     }
 
-    public void excluir(Formulario f){
+    public void excluir(Formulario f) {
         banco.delete("documento", "id = ?",
-                new String[]{f.getId().toString()} );
+                new String[]{f.getId().toString()});
     }
 
     public void atualizar(Formulario formulario) {
@@ -127,8 +133,24 @@ public class FormularioDAO {
         values.put("cpf", formulario.getCpf());
         values.put("celular", formulario.getCelular());
         values.put("responsabilidade", formulario.getResponsabilidade());
+        values.put("caminhoImagem", formulario.getCaminhoImagem());
 
         banco.update("documento", values, "id = ?",
                 new String[]{formulario.getId().toString()});
+    }
+
+    public boolean exportarTabela() {
+        boolean exportado = false;
+        Cursor cursor = banco.rawQuery("SELECT * FROM documento", null);
+        Csv csv = new Csv(cursor);
+        File f = csv.exportDB();
+        if (f.canRead())
+            exportado = true;
+
+        return exportado;
+    }
+
+    public void limparBanco() {
+        banco.execSQL("DELETE FROM documento");
     }
 }

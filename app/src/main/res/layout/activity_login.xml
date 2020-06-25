@@ -19,15 +19,15 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="385dp"
-                android:layout_height="214dp"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
                 app:srcCompat="@drawable/logo" />
 
             <EditText
                 android:background="@drawable/edittext_style"
                 android:id="@+id/emailLoginId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:hint="@string/login_email"
                 android:inputType="textPersonName"
                 android:textColor="@color/colorAccent"
@@ -38,7 +38,7 @@
                 android:background="@drawable/edittext_style"
                 android:id="@+id/senhaLoginId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:hint="@string/login_senha"
                 android:inputType="textPassword"
                 android:textColor="@color/colorAccent"
@@ -53,7 +53,7 @@
                 android:text="Login"
                 android:textColor="@android:color/white" />
 
-            <com.google.android.gms.common.SignInButton
+           <!-- <com.google.android.gms.common.SignInButton
                 android:layout_marginTop="10dp"
                 android:id="@+id/botaoLogarGoogleId"
                 android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:id="@+id/botaoLoginFacebook"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/altura_Botao" />
-
+-->
             <TextView
                 android:layout_marginTop="@dimen/distancia"
                 android:id="@+id/registraId"

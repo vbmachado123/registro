@@ -35,7 +35,7 @@
             <TextView
                 android:id="@+id/confirmaEnd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:background="@drawable/edittext_style"
                 android:layout_marginTop="@dimen/distancia"
                 android:paddingLeft="8dp"
@@ -45,7 +45,7 @@
             <TextView
                 android:id="@+id/confirmaNome"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:layout_marginTop="@dimen/distancia"
                 android:background="@drawable/edittext_style"
                 android:textColor="@color/colorAccent"
@@ -57,7 +57,7 @@
             <TextView
                 android:id="@+id/confirmaRg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:background="@drawable/edittext_style"
                 android:layout_marginTop="@dimen/distancia"
                 android:textColor="@color/colorAccent"
@@ -69,7 +69,7 @@
             <TextView
                 android:id="@+id/confirmaCpf"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:textSize="16dp"
                 android:textColor="@color/colorAccent"
                 android:background="@drawable/edittext_style"
@@ -81,7 +81,7 @@
             <TextView
                 android:id="@+id/confirmaCelular"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:textSize="16dp"
                 android:textColor="@color/colorAccent"
                 android:background="@drawable/edittext_style"
@@ -93,7 +93,7 @@
             <TextView
                 android:id="@+id/confirmaResponsabilidade"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/confirmaCelular"

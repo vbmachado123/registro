@@ -7,4 +7,5 @@
     <dimen name="altura_Botao">44dp</dimen>
     <dimen name="imagem_Documento">200dp</dimen>
     <dimen name="distancia">8dp</dimen>
+    <dimen name="tamanhoEditText">50dp</dimen>
 </resources>
