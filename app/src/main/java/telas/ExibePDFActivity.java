@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,8 @@ public class ExibePDFActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exibe_pdf);
 
@@ -120,10 +123,10 @@ public class ExibePDFActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.item_salvar:
                 Toast.makeText(this, "Documento salvo em: " + file, Toast.LENGTH_SHORT).show();
-                acessaActivity(MainActivity.class);
+                acessaActivity(HomeActivity.class);
                 return true;
             case R.id.item_home:
-                acessaActivity(MainActivity.class);
+                acessaActivity(HomeActivity.class);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -60,11 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email;
     private EditText senha;
     private Button botaoLogar;
-    private SignInButton botaoLoginGoogle;
-    private LoginButton botaoLoginFacebook;
     private TextView textoRegistrar;
-
-    private GoogleSignInClient mGoogleSignInClient;
 
     private Usuario usuario;
     private String identificadorUsuarioLogado;
@@ -75,9 +72,10 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private CallbackManager callbackManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -85,15 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         if(mAuth == null) {
-            FacebookSdk.sdkInitialize(getApplicationContext());
-            AppEventsLogger.activateApp(this);
 
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail()
-                    .build();
-
-            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         }
 
         Permissao permissao = new Permissao();
@@ -105,11 +95,9 @@ public class LoginActivity extends AppCompatActivity {
         senha = (EditText) findViewById(R.id.senhaLoginId);
         botaoLogar = (Button) findViewById(R.id.botaoLogarId);
         textoRegistrar = (TextView) findViewById(R.id.registraId);
-        botaoLoginGoogle = (SignInButton) findViewById(R.id.botaoLogarGoogleId);
+      /*  botaoLoginGoogle = (SignInButton) findViewById(R.id.botaoLogarGoogleId);
         botaoLoginFacebook = (LoginButton) findViewById(R.id.botaoLoginFacebook);
-
-        botaoLoginFacebook.setReadPermissions(Arrays.asList("email"));
-
+*/
         botaoLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,13 +109,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        botaoLoginGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logarGoogle();
-            }
-        });
-
         textoRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,61 +117,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void botaoLoginFacebook(View v){
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(LoginActivity.this, "Solicitação cancelada", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(LoginActivity.this, "Erro na solicitação: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void handleFacebookToken(AccessToken accessToken) {
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
-        mAuth.signInWithCredential(credential)
-        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-              if(task.isSuccessful()){
-                  valueEventListenerUsuario = new ValueEventListener() {
-                      @Override
-                      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                          Usuario usuarioRecuperado = dataSnapshot.getValue(Usuario.class);
-
-                          Preferencias preferencias = new Preferencias(LoginActivity.this);
-                          preferencias.salvarDados(identificadorUsuarioLogado, usuarioRecuperado.getNome());
-                      }
-                      @Override
-                      public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                      }
-                  };
-              }
-                referenceFirebase.addListenerForSingleValueEvent(valueEventListenerUsuario);
-
-                abrirTelaPrincipal();
-                Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }
-
-    private void logarGoogle() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private void validarLogin() {
@@ -263,7 +189,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void abrirTelaPrincipal() {
 
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
@@ -271,27 +197,6 @@ public class LoginActivity extends AppCompatActivity {
     public void abrirCadastroUsuario(View view) {
         Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SIGN_IN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
-        try{
-            GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
-            Toast.makeText(LoginActivity.this,"Sucesso ao logar",Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(acc);
-        }
-        catch (ApiException e){
-            Toast.makeText(LoginActivity.this,"Erro ao logar",Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(null);
-        }
     }
 
     private void FirebaseGoogleAuth(GoogleSignInAccount acct) {
@@ -308,7 +213,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         Preferencias preferencias = new Preferencias(LoginActivity.this);
                         preferencias.salvarDados(identificadorUsuarioLogado, user.getDisplayName());
-                        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
                         abrirTelaPrincipal();
                     } else {
                         Toast.makeText(LoginActivity.this, "Erro", Toast.LENGTH_SHORT).show();
@@ -321,6 +225,5 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Erro na conta", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }

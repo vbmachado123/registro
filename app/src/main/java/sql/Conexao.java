@@ -18,13 +18,15 @@ public class Conexao extends SQLiteOpenHelper {
 
     private String tabelaFormulario = "CREATE TABLE IF NOT EXISTS documento(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "endereco TEXT, nome TEXT, rg TEXT, cpf TEXT, " +
-            "celular TEXT, responsabilidade TEXT)";
+            "celular TEXT, responsabilidade TEXT, caminhoImagem TEXT)";
 
     private String tabelaPdf = "CREATE TABLE IF NOT EXISTS pdf (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "idInspecao INTEGER, caminhoPdf TEXT)";
 
     private String tabelaConfiguracao = "CREATE TABLE IF NOT EXISTS configuracao (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "email TEXT, nome TEXT, exibeAssinatura INTEGER, caminhoPasta TEXT)";
+
+    private String insereColunaImagem = "ALTER TABLE documento ADD COLUMN caminhoImagem TEXT";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -40,5 +42,6 @@ public class Conexao extends SQLiteOpenHelper {
         db.execSQL(tabelaFormulario);
         db.execSQL(tabelaPdf);
         db.execSQL(tabelaConfiguracao);
+        db.execSQL(insereColunaImagem);
     }
 }

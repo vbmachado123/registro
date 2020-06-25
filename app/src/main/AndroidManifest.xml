@@ -24,31 +24,60 @@
         android:roundIcon="@drawable/icon_8"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="telas.TesteActivity"></activity>
-        <activity android:name="telas.SplashScreen">
+        <activity android:name="telas.HomeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="telas.TesteActivity" />
+        <activity android:name="telas.SplashScreen"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="telas.MainActivity" />
-        <activity android:name="telas.CadastroActivity" />
-        <activity android:name="telas.LoginActivity" />
-        <activity android:name="telas.ConfirmaActivity" />
+        <activity android:name="telas.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="telas.CadastroActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name="telas.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name="telas.ConfirmaActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="telas.AssinaturaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"
+            />
         <activity
             android:name="telas.ImagemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity android:name="telas.ExibePDFActivity" />
-        <activity android:name="telas.ListarFormsActivity" />
-        <activity android:name="telas.ConfiguracoesActivity" />
+            tools:ignore="LockedOrientationActivity"
+            />
+        <activity android:name="telas.ExibePDFActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name="telas.ListarFormsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name="telas.ConfiguracoesActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -60,16 +89,26 @@
                 android:resource="@xml/file_path" />
         </provider>
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
-        <activity android:name="com.facebook.CustomTabActivity" android:exported="true">
-            <intent-filter> <action android:name="android.intent.action.VIEW" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

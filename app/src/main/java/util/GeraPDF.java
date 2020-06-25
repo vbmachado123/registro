@@ -32,9 +32,10 @@ public class GeraPDF {
         String root = Environment.getExternalStorageDirectory().getAbsolutePath();
         String nomePasta = root + "/Registro";
         String caminhoAssinatura =  nomePasta + "/Imagens/" + "Assinatura" + ".jpg";
-        String caminhoDocumento = nomePasta + "/Imagens/" + "Documento" + ".jpg";
 
         f = new FormularioDAO(activity).recupera();
+
+        String caminhoDocumento = f.getCaminhoImagem();
 
         //Criando a instância para escrever o doc
         PdfWriter.getInstance(documento, new FileOutputStream(destino));

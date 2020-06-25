@@ -15,6 +15,7 @@ public class Formulario implements Serializable {
     private String cpf;
     private String celular;
     private String responsabilidade;
+    private String caminhoImagem;
 
     public Integer getId() {
         return id;
@@ -70,6 +71,14 @@ public class Formulario implements Serializable {
 
     public void setResponsabilidade(String responsabilidade) {
         this.responsabilidade = responsabilidade;
+    }
+
+    public String getCaminhoImagem() {
+        return caminhoImagem;
+    }
+
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
     }
 
     @Override

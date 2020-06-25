@@ -52,4 +52,8 @@ public class PdfDAO {
         return pdf;
     }
 
+    public void limparBanco(){
+        banco.execSQL("DELETE FROM pdf");
+    }
+
 }

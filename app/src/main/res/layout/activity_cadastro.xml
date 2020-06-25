@@ -26,7 +26,7 @@
             <EditText
                 android:id="@+id/cadastroNomeId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:background="@drawable/edittext_style"
                 android:hint="Digite seu nome"
                 android:inputType="textPersonName"
@@ -36,7 +36,7 @@
             <EditText
                 android:id="@+id/cadastroEmailId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:layout_below="@+id/cadastroNomeId"
                 android:layout_marginTop="@dimen/distancia"
                 android:background="@drawable/edittext_style"
@@ -48,7 +48,7 @@
             <EditText
                 android:id="@+id/cadastroSenhaId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/tamanhoEditText"
                 android:layout_marginTop="@dimen/distancia"
                 android:background="@drawable/edittext_style"
                 android:hint="Digite sua senha"
