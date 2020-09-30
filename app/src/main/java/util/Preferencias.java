@@ -17,6 +17,7 @@ public class Preferencias {
 
     private final String CHAVE_IDENTIFICADOR = "identificadorUsuarioLogado";
     private final String CHAVE_NOME = "nomeUsuarioLogado";
+    private final int CHAVE_TERMO = 1;
 
     public Preferencias(Context contextoParametro) {
 
@@ -31,6 +32,15 @@ public class Preferencias {
         editor.putString(CHAVE_NOME, nomeUsuario);
         editor.commit();
 
+    }
+
+    public void salvarTermoSelecionado(int idTermo) {
+        editor.putInt(String.valueOf(CHAVE_TERMO), idTermo);
+        editor.commit();
+    }
+
+    public int getTermo() {
+        return preferences.getInt(String.valueOf(CHAVE_TERMO), 1);
     }
 
     public String getIdentificador(){

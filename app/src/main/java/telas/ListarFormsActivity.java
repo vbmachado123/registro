@@ -1,5 +1,6 @@
 package telas;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import model.Formulario;
 import helper.FormularioAdapter;
 import helper.FormularioDAO;
 import model.Pdf;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import victor.machado.com.br.registro.R;
 
 public class ListarFormsActivity extends AppCompatActivity {
@@ -207,4 +209,11 @@ public class ListarFormsActivity extends AppCompatActivity {
             } else Toast.makeText(this, "Documento indisponível", Toast.LENGTH_SHORT).show();
         } else Toast.makeText(this, "Documento indisponível", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+
 }

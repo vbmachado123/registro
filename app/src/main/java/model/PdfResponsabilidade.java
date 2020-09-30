@@ -23,13 +23,13 @@ public class PdfResponsabilidade {
     private String textoOpcaoProprietario = "Proprietário e detentor da posse direta do imóvel";
     private String textoOpcaoMoradorResponsavel = "Morador e responsável pelo imóvel em referência estando apto a solicitar ligação de água e/ou esgotos para tal imóvel";
 
-    private String textoMeioNeg1 = "Declara, ainda, estar ciente de que será responsável pelo pagamento das conta/faturas mensais de consumo de água e/ou\n" +
+    private String textoMeioNeg1 = "<Declara, ainda, estar ciente de que será responsável pelo pagamento das conta/faturas mensais de consumo de água e/ou\n" +
             "esgoto";
 
     private String textoMeioNormal = "e, que, caso deixe de ser responsável pelo imóvel, é responsável por entrar em contato com a Sabesp para solicitar o\n" +
             "encerramento da relação contratual que se inicia com o pedido de ligação de água e/ou esgotos.";
 
-    private String textoMeioNeg2 = "Que recebeu o contrato de\n" +
+    private String textoMeioNeg2 = "<Que recebeu o contrato de\n" +
             "adesão nesta data e está ciente da obrigatoridade de manter o cadastro atualizado conforme clausula quinta - deveres do\n" +
             "usuário - item 5.1.5 'Informar corretamente e manter sempre atualizados os dados cadastrais'.";
 
@@ -138,4 +138,13 @@ public class PdfResponsabilidade {
     }
 
     public String getqLinha() {return qLinha;}
+
+    public String[] getAllCampos() {
+        String[] campos = {
+                getTextoInteressado(), "Campo_Endereco", getE(), "Campo_Selecionado", ">" + getTextoOpcaoProprietario(),
+                ">" + getTextoOpcaoMoradorResponsavel(), getTextoMeioNeg1(), getTextoMeioNormal(),
+                getTextoMeioNeg2(), getDocNaoApresentado(), getDocIPTU(),"Campo_Nome", "Campo_RG", "Campo_CPF", getInfObrigatoria()};
+
+        return campos;
+    }
 }

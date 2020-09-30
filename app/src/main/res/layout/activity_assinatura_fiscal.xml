@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="telas.AssinaturaFiscalActivity">
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/toolbar"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@drawable/fundoassinatura"
+            android:id="@+id/rlAssinatura"/>
+
+        <Button
+            android:id="@+id/salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_style"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/distancia"
+            android:text="Salvar"
+            fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
+            tools:ignore="MissingPrefix" />
+
+    </LinearLayout>
+</RelativeLayout>

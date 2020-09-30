@@ -62,9 +62,9 @@
                 android:layout_marginTop="@dimen/distancia"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp"
-                android:layout_below="@+id/confirmaNome"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/confirmaCpf"
@@ -74,9 +74,58 @@
                 android:textColor="@color/colorAccent"
                 android:background="@drawable/edittext_style"
                 android:layout_marginTop="@dimen/distancia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/confirmaCnpj"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:background="@drawable/edittext_style"
+                android:layout_marginTop="@dimen/distancia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/confirmaCnh"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:background="@drawable/edittext_style"
+                android:layout_marginTop="@dimen/distancia"
                 android:layout_below="@+id/confirmaRg"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/confirmaIE"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:background="@drawable/edittext_style"
+                android:layout_marginTop="@dimen/distancia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/confirmaIM"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:background="@drawable/edittext_style"
+                android:layout_marginTop="@dimen/distancia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/confirmaCelular"
@@ -100,8 +149,7 @@
                 android:background="@drawable/edittext_style"
                 android:layout_marginTop="@dimen/distancia"
                 android:textSize="16dp"
-                android:textColor="@color/colorAccent"
-                />
+                android:textColor="@color/colorAccent" />
 
             <Button
                 android:id="@+id/botaoNao"
@@ -111,7 +159,9 @@
                 android:layout_marginTop="@dimen/distancia"
                 android:paddingHorizontal="20dp"
                 android:text="Não"
-                android:textColor="@color/colorPrimaryDark" />
+                fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
+                android:textColor="@color/colorPrimaryDark"
+                tools:ignore="MissingPrefix" />
 
             <Button
                 android:id="@+id/botaoSim"
@@ -120,7 +170,9 @@
                 android:layout_marginTop="@dimen/distancia"
                 android:background="@drawable/button_style"
                 android:text="Sim"
-                android:textColor="@android:color/white" />
+                fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
+                android:textColor="@android:color/white"
+                tools:ignore="MissingPrefix" />
         </LinearLayout>
     </ScrollView>
 

@@ -29,7 +29,7 @@ public class ConfiguracaoDAO {
             configuracao.setId(cursor.getInt(0));
             configuracao.setEmail(cursor.getString(1));
             configuracao.setNome(cursor.getString(2));
-            configuracao.setExibeAssinatura(cursor.getInt(3));
+            configuracao.setCaminhoImagem(cursor.getString(3));
             configuracao.setCaminhoPasta(cursor.getString(4));
         }
         return configuracao;
@@ -40,7 +40,7 @@ public class ConfiguracaoDAO {
         ContentValues values = new ContentValues();
         values.put("email", configuracao.getEmail());
         values.put("nome", configuracao.getNome());
-        values.put("exibeAssinatura", configuracao.getExibeAssinatura());
+        values.put("caminhoImagem", configuracao.getCaminhoImagem());
         values.put("caminhoPasta", configuracao.getCaminhoPasta());
 
         return banco.insert("configuracao", null, values);
@@ -51,7 +51,7 @@ public class ConfiguracaoDAO {
         ContentValues values = new ContentValues();
         values.put("email", configuracao.getEmail());
         values.put("nome", configuracao.getNome());
-        values.put("exibeAssinatura", configuracao.getExibeAssinatura());
+        values.put("caminhoImagem", configuracao.getCaminhoImagem());
         values.put("caminhoPasta", configuracao.getCaminhoPasta());
 
         banco.update("configuracao", values, "id = ?",

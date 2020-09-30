@@ -28,6 +28,8 @@ public class PdfDAO {
             pdf.setId(cursor.getInt(0));
             pdf.setIdFormulario(cursor.getInt(1));
             pdf.setCaminhoPdf(cursor.getString(2));
+            pdf.setDataHora(cursor.getString(3));
+            pdf.setIdentificacao(cursor.getString(4));
         }
         return pdf;
     }
@@ -37,6 +39,8 @@ public class PdfDAO {
         ContentValues values = new ContentValues();
         values.put("idInspecao", pdf.getIdFormulario());
         values.put("caminhoPdf", pdf.getCaminhoPdf());
+        values.put("dataHora", pdf.getDataHora());
+        values.put("identificacao", pdf.getIdentificacao());
 
         return banco.insert("pdf", null, values);
     }
@@ -48,6 +52,8 @@ public class PdfDAO {
             pdf = new Pdf();
             pdf.setIdFormulario(cursor.getInt(1));
             pdf.setCaminhoPdf(cursor.getString(2));
+            pdf.setDataHora(cursor.getString(3));
+            pdf.setIdentificacao(cursor.getString(4));
         }
         return pdf;
     }

@@ -1,15 +1,20 @@
 package telas;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,12 +28,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.apache.commons.io.IOUtils;
+import org.w3c.dom.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import helper.ConfiguracaoDAO;
+import helper.UsuarioDAO;
 import model.Configuracao;
+import model.Usuario;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import util.ConfiguracaoFirebase;
 import victor.machado.com.br.registro.R;
 
@@ -38,11 +48,13 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FirebaseAuth usuarioAutenticacao;
     private EditText email, nome;
-    private Switch exibeAssinatura;
+    private ImageView assinaturaFiscal;
     private TextView caminhoPasta;
     private FloatingActionButton fabSalvar;
-    private Configuracao configuracao;
-    private ConfiguracaoDAO dao;
+    private Usuario usuario;
+    private UsuarioDAO dao;
+    private String caminhoAssinatura;
+    private String textoCaminhoPasta = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +63,10 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes);
 
-         configuracao = new Configuracao();
-         dao = new ConfiguracaoDAO(ConfiguracoesActivity.this);
+        usuario = new Usuario();
+        dao = new UsuarioDAO(ConfiguracoesActivity.this);
+
+        textoCaminhoPasta = Environment.getExternalStorageDirectory() + "/Registro";
 
         //Valida sessão
         usuarioAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -64,33 +78,57 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         gifRegistro = (GifImageView) findViewById(R.id.gifRegistro);
         email = (EditText) findViewById(R.id.etEmail);
         nome = (EditText) findViewById(R.id.etNome);
-        exibeAssinatura = (Switch) findViewById(R.id.sExibeAssinatura);
+        assinaturaFiscal = (ImageView) findViewById(R.id.assinaturaFiscal);
         caminhoPasta = (TextView) findViewById(R.id.caminhoPasta);
         fabSalvar = (FloatingActionButton) findViewById(R.id.botaoSave);
         recuperaInformacoes();
 
         //Setando a resolução do gif
-        try{
+        try {
             InputStream inputStream = getAssets().open("registro.gif");
             byte[] bytes = IOUtils.toByteArray(inputStream);
             gifRegistro.setBytes(bytes);
             gifRegistro.startAnimation();
-        } catch (IOException e){/*...*/}
+        } catch (IOException e) {/*...*/}
+
+        caminhoAssinatura = textoCaminhoPasta + "/Imagens/" + "AssinaturaFiscal" + ".jpg";
+
+        File fileAssinatura = new File(caminhoAssinatura);
+        if (fileAssinatura.exists()) {
+            Bitmap assinatura = BitmapFactory.decodeFile(String.valueOf(fileAssinatura));
+            assinaturaFiscal.setImageBitmap(assinatura);
+        }
+
+        assinaturaFiscal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog dialog = new AlertDialog.Builder(ConfiguracoesActivity.this, R.style.DialogStyle)
+                        .setTitle("Atenção")
+                        .setMessage("Deseja alterar a assinatura?")
+                        .setNegativeButton("Cancelar", null)
+                        .setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                acessaActivity(AssinaturaFiscalActivity.class);
+
+                            }
+                        }).create();
+                dialog.show();
+            }
+        });
     }
 
     private void recuperaInformacoes() {
 
-        configuracao = dao.recupera();
-        if(configuracao != null) {
-            email.setText(configuracao.getEmail());
-            nome.setText(configuracao.getNome());
-                if(configuracao.getExibeAssinatura() == 1)
-                  exibeAssinatura.setActivated(true);
-                else if (configuracao.getExibeAssinatura() == 0)
-                    exibeAssinatura.setActivated(false);
-
-            caminhoPasta.setText(configuracao.getCaminhoPasta());
+        usuario = dao.recupera();
+        if (usuario != null) {
+            email.setText(usuario.getEmail());
+            nome.setText(usuario.getNome());
         }
+
+        caminhoPasta.setText(textoCaminhoPasta);
 
         fabSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,20 +142,18 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                Configuracao config = dao.recupera();
+                                Usuario user = dao.recupera();
                                 int valorExibeAssinatura = 0;
 
-                                if(exibeAssinatura.isChecked())  valorExibeAssinatura = 1;
                                 String caminhoPasta = Environment.getExternalStorageDirectory() + "/Registro";
 
-                                configuracao = new Configuracao();
-                                configuracao.setEmail(email.getText().toString());
-                                configuracao.setNome(nome.getText().toString());
-                                configuracao.setExibeAssinatura(valorExibeAssinatura);
-                                configuracao.setCaminhoPasta(caminhoPasta);
+                                usuario = new Usuario();
+                                usuario.setEmail(email.getText().toString());
+                                usuario.setNome(nome.getText().toString());
+                                //  configuracao.setCaminhoPasta(caminhoPasta);
 
-                                if(config != null)dao.atualizar(configuracao);
-                                else dao.inserir(configuracao);
+                                if (user != null) dao.atualizar(usuario);
+                                else dao.inserir(usuario);
 
                                 acessaActivity(MainActivity.class);
 
@@ -138,7 +174,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch ( item.getItemId() ) {
+        switch (item.getItemId()) {
             case R.id.itemSair:
                 deslogarUsuario();
                 return true;
@@ -148,7 +184,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             case R.id.item_lista:
                 acessaActivity(ListarFormsActivity.class);
                 return true;
-            case  R.id.item_sincroniza:
+            case R.id.item_sincroniza:
                 acessaActivity(MainActivity.class);
                 return true;
             default:
@@ -167,4 +203,8 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }

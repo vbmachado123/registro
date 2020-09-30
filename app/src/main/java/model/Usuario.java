@@ -11,7 +11,9 @@ import util.ConfiguracaoFirebase;
 
 public class Usuario {
 
-    private String id;
+    private int id;
+    private int idEmpresa;
+    private int idImagem;
     private String nome;
     private String email;
     private String senha;
@@ -20,15 +22,15 @@ public class Usuario {
 
     public void salvar(){
         DatabaseReference refenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        refenciaFirebase.child("usuarios").child(getId()).setValue(this);
+        refenciaFirebase.child("usuarios").child(String.valueOf(getId())).setValue(this);
     }
 
     @Exclude
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,5 +57,21 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public int getIdImagem() {
+        return idImagem;
+    }
+
+    public void setIdImagem(int idImagem) {
+        this.idImagem = idImagem;
     }
 }

@@ -1,5 +1,6 @@
 package telas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +49,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import util.Base64Custom;
 import util.ConfiguracaoFirebase;
 import util.Permissao;
@@ -226,4 +228,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }
