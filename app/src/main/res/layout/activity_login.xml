@@ -45,13 +45,15 @@
                 android:textColorHint="@color/colorPrimary" />
 
             <Button
+                fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
                 android:layout_marginTop="@dimen/distancia"
                 android:id="@+id/botaoLogarId"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/altura_Botao"
                 android:background="@drawable/button_style"
                 android:text="Login"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                tools:ignore="MissingPrefix" />
 
            <!-- <com.google.android.gms.common.SignInButton
                 android:layout_marginTop="10dp"

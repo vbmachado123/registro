@@ -23,9 +23,35 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:padding="8dp"
+                android:background="@drawable/ic_camera"
                 android:id="@+id/imgDocumento"
                 android:layout_width="400dp"
                 android:layout_height="500dp" />
+
+            <ImageView
+                android:padding="8dp"
+                android:id="@+id/imgDocumento1"
+                android:layout_width="400dp"
+                android:layout_height="500dp"
+                android:background="@drawable/ic_camera"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:padding="8dp"
+                android:id="@+id/imgDocumento2"
+                android:layout_width="400dp"
+                android:layout_height="500dp"
+                android:background="@drawable/ic_camera"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:padding="8dp"
+                android:id="@+id/imgDocumento3"
+                android:layout_width="400dp"
+                android:layout_height="500dp"
+                android:background="@drawable/ic_camera"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/botaoAssinar"
@@ -33,7 +59,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_style"
                 android:text="Assinar Formulário"
-                android:textColor="@android:color/white" />
+                fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
+                android:textColor="@android:color/white"
+                tools:ignore="MissingPrefix" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -18,18 +18,23 @@
         android:required="false" />
 
     <application
+        android:name="util.CustomApplication"
         android:allowBackup="true"
-        android:icon="@drawable/icon_8"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon_8"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="telas.HomeActivity"
+        <activity android:name="telas.TermoActivity"></activity>
+        <activity android:name="telas.AssinaturaFiscalActivity" />
+        <activity
+            android:name="telas.HomeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name="telas.TesteActivity" />
-        <activity android:name="telas.SplashScreen"
+        <activity
+            android:name="telas.SplashScreen"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
@@ -39,45 +44,50 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="telas.MainActivity"
+        <activity
+            android:name="telas.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:screenOrientation="portrait"/>
-        <activity android:name="telas.CadastroActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name="telas.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="telas.CadastroActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name="telas.ConfirmaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="telas.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="telas.ConfirmaActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name="telas.AssinaturaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            />
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="telas.ImagemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            />
-        <activity android:name="telas.ExibePDFActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="telas.ExibePDFActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name="telas.ListarFormsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="telas.ListarFormsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name="telas.ConfiguracoesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="telas.ConfiguracoesActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

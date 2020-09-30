@@ -1,6 +1,7 @@
 package telas;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import model.Formulario;
 import helper.FormularioDAO;
 import model.PdfResponsabilidade;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import victor.machado.com.br.registro.R;
 
 import static androidx.core.content.FileProvider.getUriForFile;
@@ -136,6 +138,11 @@ public class ExibePDFActivity extends AppCompatActivity {
     private void acessaActivity(Class c){
         Intent it = new Intent(ExibePDFActivity.this, c);
         startActivity(it);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 }

@@ -1,5 +1,6 @@
 package telas;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,6 +36,7 @@ import helper.PdfDAO;
 import model.Assinatura;
 import model.Formulario;
 import model.Pdf;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import util.GeraPDF;
 import victor.machado.com.br.registro.R;
 
@@ -144,4 +146,10 @@ public class AssinaturaActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
 }

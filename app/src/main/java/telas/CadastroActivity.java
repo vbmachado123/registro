@@ -1,5 +1,6 @@
 package telas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import helper.ConfiguracaoDAO;
 import model.Configuracao;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import util.Base64Custom;
 import util.ConfiguracaoFirebase;
 import util.Preferencias;
@@ -92,7 +94,7 @@ public class CadastroActivity extends AppCompatActivity {
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
 
                     String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
-                    usuario.setId(identificadorUsuario);
+                    //usuario.setId(identificadorUsuario);
                     usuario.salvar();
 
                     Preferencias preferencias = new Preferencias(CadastroActivity.this);
@@ -136,4 +138,10 @@ public class CadastroActivity extends AppCompatActivity {
         Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
 }

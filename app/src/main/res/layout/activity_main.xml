@@ -22,20 +22,20 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tituloTermoId"
+                android:layout_marginTop="40dp"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="viewEnd"
-                android:text="@string/app_version"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="italic|bold"
-                android:gravity="end" />
+                android:gravity="start" />
 
             <EditText
                 android:background="@drawable/edittext_style"
                 android:id="@+id/endClienteId"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tamanhoEditText"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="40dp"
                 android:hint="Endereço"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="true"
@@ -63,10 +63,11 @@
                 android:layout_height="@dimen/tamanhoEditText"
                 android:selectAllOnFocus="true"
                 android:layout_marginTop="@dimen/distancia"
-                android:hint="Rg"
+                android:hint="RG"
                 android:inputType="number"
                 android:textColor="@color/colorAccent"
-                android:textColorHint="@color/colorPrimary" />
+                android:textColorHint="@color/colorPrimary"
+                android:visibility="gone"/>
 
             <EditText
                 android:layout_marginTop="@dimen/distancia"
@@ -75,10 +76,63 @@
                 android:layout_width="@dimen/largura_Campo"
                 android:layout_height="@dimen/tamanhoEditText"
                 android:selectAllOnFocus="true"
-                android:hint="Cpf"
+                android:hint="CPF"
                 android:inputType="number"
                 android:textColor="@color/colorAccent"
-                android:textColorHint="@color/colorPrimary" />
+                android:textColorHint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/cnpjClienteId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:selectAllOnFocus="true"
+                android:layout_marginTop="@dimen/distancia"
+                android:hint="CNPJ"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/ieId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:selectAllOnFocus="true"
+                android:layout_marginTop="@dimen/distancia"
+                android:hint="Inscrição Estadual"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <EditText
+                android:background="@drawable/edittext_style"
+                android:id="@+id/imId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:selectAllOnFocus="true"
+                android:layout_marginTop="@dimen/distancia"
+                android:hint="Inscrição Municipal CCM"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <EditText
+                android:layout_marginTop="@dimen/distancia"
+                android:background="@drawable/edittext_style"
+                android:id="@+id/cnhClienteId"
+                android:layout_width="@dimen/largura_Campo"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:selectAllOnFocus="true"
+                android:hint="CNH"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary"
+                android:visibility="gone"/>
 
             <EditText
                 android:background="@drawable/edittext_style"
@@ -92,37 +146,15 @@
                 android:textColor="@color/colorAccent"
                 android:textColorHint="@color/colorPrimary" />
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
+            <TextView
+                android:id="@+id/opcaoEscolhidaId"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/textoOpcoes"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/celularClienteId"
-                android:layout_marginTop="21dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:theme="@style/MyCheckBoxStyle"
-                    android:id="@+id/proprietarioId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText5"
-                    android:layout_marginEnd="26dp"
-                    android:layout_marginRight="26dp"
-                    android:text="Proprietário"
-                    android:textColor="@color/colorPrimary" />
-
-                <RadioButton
-                    android:theme="@style/MyCheckBoxStyle"
-                    android:id="@+id/moradorResponsavelId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText5"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
-                    android:text="Morador Responsável"
-                    android:textColor="@color/colorPrimary" />
-
-            </RadioGroup>
+                android:layout_height="wrap_content"
+                android:gravity="start" />
 
             <Button
                 android:id="@+id/gerarDocId"
@@ -130,7 +162,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_style"
                 android:text="@string/textobotaoenviar"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
+                tools:ignore="MissingPrefix"/>
         </LinearLayout>
     </ScrollView>
 

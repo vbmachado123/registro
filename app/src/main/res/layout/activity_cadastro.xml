@@ -34,6 +34,17 @@
                 android:textColorHint="@color/colorPrimary" />
 
             <EditText
+                android:layout_marginTop="@dimen/distancia"
+                android:id="@+id/cadastroEmpresaId"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tamanhoEditText"
+                android:background="@drawable/edittext_style"
+                android:hint="Selecione a empresa"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorPrimary" />
+
+            <EditText
                 android:id="@+id/cadastroEmailId"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tamanhoEditText"
@@ -57,6 +68,7 @@
                 android:textColorHint="@color/colorPrimary" />
 
             <Button
+                fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
                 android:id="@+id/cadastrarBotaoId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +76,8 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/button_style"
                 android:text="Cadastrar"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                tools:ignore="MissingPrefix" />
 
             <TextView
                 android:id="@+id/loginId"

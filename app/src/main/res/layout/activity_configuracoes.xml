@@ -23,13 +23,15 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_marginLeft="2dp"
                 android:id="@+id/textView2"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:text="Servidor"
-                android:textSize="24sp"
+                android:text="Usuário"
+                android:textSize="20sp"
                 tools:ignore="RtlCompat"
                 android:layout_marginTop="@dimen/distancia"/>
 
@@ -43,12 +45,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="@string/email"/>
+                    android:text="@string/email"
+                    android:visibility="gone"/>
 
                 <EditText
                     android:textColor="@color/colorAccent"
+                    android:background="@drawable/edittext_white_style"
                     style="@style/MyEditTextTheme"
                     android:id="@+id/etEmail"
+                    android:hint="E-mail"
+                    android:textColorHint="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
@@ -64,36 +70,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:visibility="gone"
                     android:text="@string/nome"/>
 
                 <EditText
                     android:textColor="@color/colorAccent"
                     style="@style/MyEditTextTheme"
                     android:id="@+id/etNome"
+                    android:hint="Nome"
+                    android:textColorHint="@color/colorPrimary"
+                    android:background="@drawable/edittext_white_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName" />
             </TableRow>
 
-            <Switch
-                android:layout_marginTop="@dimen/distancia"
-                android:textSize="20sp"
-                android:id="@+id/sExibeAssinatura"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Exibir assinatura do fiscal" />
+        <ImageView
+            android:layout_margin="4dp"
+            android:id="@+id/assinaturaFiscal"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
                 tools:ignore="RtlCompat"
                 android:text="Suporte"
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="@dimen/distancia"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <TableRow
                 android:layout_marginTop="8dp"
@@ -105,14 +113,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:visibility="gone"
                     android:text="@string/email"/>
 
                 <TextView
                     android:text="@string/email_contato"
+                    android:background="@drawable/edittext_white_style"
+                    android:layout_width="match_parent"
                     android:textColor="@color/colorPrimary"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
             <TextView
@@ -120,11 +130,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Armazenamento"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
                 tools:ignore="RtlCompat"
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="@dimen/distancia"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <TableRow
                 android:layout_marginTop="8dp"
@@ -136,12 +147,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:visibility="gone"
                     android:text="@string/pasta"/>
 
                 <TextView
                     android:textColor="@color/colorPrimary"
                     android:id="@+id/caminhoPasta"
-                    android:layout_width="wrap_content"
+                    android:background="@drawable/edittext_white_style"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp" />
             </TableRow>
@@ -150,12 +163,13 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
                 tools:ignore="RtlCompat"
                 android:textColor="@color/colorAccent"
                 android:layout_marginTop="@dimen/distancia"
                 android:text="Registro"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <com.felipecsl.gifimageview.library.GifImageView
                 android:id="@+id/gifRegistro"

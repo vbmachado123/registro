@@ -16,6 +16,7 @@ public class Formulario implements Serializable {
     private String celular;
     private String responsabilidade;
     private String caminhoImagem;
+    private int idTermoSelecionado;
 
     public Integer getId() {
         return id;
@@ -79,6 +80,14 @@ public class Formulario implements Serializable {
 
     public void setCaminhoImagem(String caminhoImagem) {
         this.caminhoImagem = caminhoImagem;
+    }
+
+    public int getIdTermoSelecionado() {
+        return idTermoSelecionado;
+    }
+
+    public void setIdTermoSelecionado(int idTermoSelecionado) {
+        this.idTermoSelecionado = idTermoSelecionado;
     }
 
     @Override

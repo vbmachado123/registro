@@ -32,7 +32,9 @@
             android:background="@drawable/button_style"
             android:textColor="@android:color/white"
             android:layout_marginTop="@dimen/distancia"
-            android:text="Salvar" />
+            fontPath="fonts/montserrat/Montserrat-ExtraBold.ttf"
+            android:text="Salvar"
+            tools:ignore="MissingPrefix" />
 
     </LinearLayout>
 </RelativeLayout>

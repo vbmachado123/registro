@@ -4,7 +4,7 @@ public class Configuracao {
     private int id;
     private String email = "";
     private String nome = "";
-    private int exibeAssinatura = 0;
+    private String caminhoImagem = "";
     private String caminhoPasta = "";
 
     public int getId() {
@@ -31,12 +31,12 @@ public class Configuracao {
         this.nome = nome;
     }
 
-    public int getExibeAssinatura() {
-        return exibeAssinatura;
+    public String getCaminhoImagem() {
+        return caminhoImagem;
     }
 
-    public void setExibeAssinatura(int exibeAssinatura) {
-        this.exibeAssinatura = exibeAssinatura;
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
     }
 
     public String getCaminhoPasta() {
